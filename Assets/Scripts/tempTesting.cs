@@ -15,7 +15,7 @@ public class tempTesting : MonoBehaviour
     {
         display = GetComponentInChildren<Image>();
         text = GetComponentInChildren<Text>();
-        display.material.color = new Color32(0, 100, 255, 255);
+        display.color = new Color32(0, 100, 255, 255);
     }
 
     // Update is called once per frame
