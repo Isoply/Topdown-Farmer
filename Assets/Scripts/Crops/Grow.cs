@@ -32,7 +32,12 @@ public class Grow : MonoBehaviour
                 if (size >= 1)
                 {
                     Debug.Log("Plant is done growing!");
+                    
                 }
+            }
+            else
+            {
+                isGrowing = false;
             }
         }
         else
@@ -48,5 +53,4 @@ public class Grow : MonoBehaviour
         plant.transform.localScale = new Vector2(size, size);
         Debug.Log("hoi");
     }
-
 }
