@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class WaterGrow : MonoBehaviour
 {
+    public ParticleSystem part;
+    public List<ParticleCollisionEvent> collisionEvents;
 
     public GameObject plant;
     public float growSpeed;
@@ -11,17 +13,17 @@ public class WaterGrow : MonoBehaviour
 
     public bool isGrowing;
 
-    public Text isDone;
 
     public GameObject waterParticle;
     // Start is called before the first frame update
     void Start()
     {
+        part = GetComponent<ParticleSystem>();
+        collisionEvents = new List<ParticleCollisionEvent>();
+
         growSpeed = 0.001f;
         size = 0.1f;
 
-        isDone.text = "Plant is still growing!";
-        GameObject.Find("PlantText").GetComponent<Text>().color = Color.red;
         waterParticle.SetActive(false);
     }
 
@@ -43,12 +45,10 @@ public class WaterGrow : MonoBehaviour
                 if(size <= 1)
                 {
                     size += growSpeed;
-                    isDone.text = "Plant is still growing!";
-                    GameObject.Find("PlantText").GetComponent<Text>().color = Color.red;
+                    Debug.Log("Plant is still growing!");
                 }if(size >= 1)
                 {
-                    isDone.text = "Plant is done growing!";
-                    GameObject.Find("PlantText").GetComponent<Text>().color = Color.green;
+                    Debug.Log("Plant is done growing!");
                 }
             }
         }
@@ -59,17 +59,11 @@ public class WaterGrow : MonoBehaviour
         
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnParticleCollision(GameObject other)
     {
         isGrowing = true;
         plant.transform.localScale = new Vector2(size, size);
-
+        Debug.Log("hoi");
     }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        isGrowing = false;
-    }
-
-
 
 }
