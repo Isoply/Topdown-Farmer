@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
+        SetShop(GameObject.Find("Buying"), gameManager.crops.allCrops);
+        SetShop(GameObject.Find("Selling"));
     }
 
     public void StartAnimationBool(Animator newAnimator)
@@ -24,5 +26,10 @@ public class UIManager : MonoBehaviour
         animator.SetBool("isPlaying", isPlaying);
 
         if (animator.name == "Shop") gameManager.ChangePauseState(GameManager.PauseStates.Change);
+    }
+
+    public void SetShop(GameObject parent, Crop crop)
+    {
+
     }
 }

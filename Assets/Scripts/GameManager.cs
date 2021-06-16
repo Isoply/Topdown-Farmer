@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [HideInInspector] public Crops crops;
+
     [HideInInspector] public bool isPaused;
+
+    private void Start()
+    {
+        crops = GameObject.FindObjectOfType<Crops>();
+    }
 
     public enum PauseStates { Paused, Unpaused, Change };
 
