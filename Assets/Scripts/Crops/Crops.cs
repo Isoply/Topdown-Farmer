@@ -5,14 +5,14 @@ using UnityEngine;
 public class Crops : MonoBehaviour
 {
     //array
-    public Crop[] allCrops =
+    public Item[] allCrops =
     {
-        new Crop("Wheat", 3),
-        new Crop ("Carrots", 9),
-        new Crop ("Corn", 12),
-        new Crop ("Potatoes", 16),
-        new Crop ("Cauliflower", 20),
-        new Crop ("Pumpkin", 25),
+        new Item("Wheat", 3),
+        new Item ("Carrots", 9),
+        new Item ("Corn", 12),
+        new Item ("Potatoes", 16),
+        new Item ("Cauliflower", 20),
+        new Item ("Pumpkin", 25),
     };
     
     void Start()
@@ -27,19 +27,5 @@ public class Crops : MonoBehaviour
     void Update()
     {
         
-    }
-}
-
-public class Crop
-{
-    public string name;
-    public int price;
-    public Sprite icon;
-
-    public Crop(string _name, int _price, Sprite _icon = null)
-    {
-        name = _name;
-        price = _price;
-        icon = _icon;
     }
 }

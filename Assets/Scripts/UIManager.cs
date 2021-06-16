@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
         if (animator.name == "Shop") gameManager.ChangePauseState(GameManager.PauseStates.Change);
     }
 
-    public void SetShop(GameObject parent, Crop[] crops, int modifier)
+    public void SetShop(GameObject parent, Item[] crops, int modifier)
     {
         GameObject prefab = parent.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
         Transform newParent = parent.transform.GetChild(0).GetChild(0);
