@@ -9,48 +9,54 @@ public class Grow : MonoBehaviour
     public float growSpeed;
     public float size;
 
+    float timer;
+    float lastTime;
     public bool isGrowing;
     // Start is called before the first frame update
     void Start()
     {
-        growSpeed = 0.001f;
+        growSpeed = 0.18f;
         size = 0.1f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isGrowing)
-        {
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                if (size <= 1)
-                {
-                    size += growSpeed;
-                    Debug.Log("Plant is still growing!");
-                }
-                if (size >= 1)
-                {
-                    Debug.Log("Plant is done growing!");
-                    
-                }
-            }
-            else
-            {
-                isGrowing = false;
-            }
-        }
-        else
-        {
-            return;
-        }
+        if (isGrowing) Growing();
 
+
+        if (timer >= 0.75f)
+        {
+            isGrowing = false;
+            Debug.Log("You gave too much water");
+        }
+        else if (timer > 0.15f) isGrowing = true;
+
+        if (lastTime == timer) timer = 0;
+
+    }
+    public void Growing()
+    {
+        if (size <= 1 && isGrowing == true)
+        {
+            size += growSpeed * Time.deltaTime;
+            plant.transform.localScale = new Vector2(size, size);
+            Debug.Log("Plant is still growing!");
+        }
+        if (size >= 1)
+        {
+            Debug.Log("Plant is done growing!");
+            timer = 0;
+            isGrowing = false;
+
+        }
     }
 
     private void OnParticleCollision(GameObject other)
     {
-        isGrowing = true;
-        plant.transform.localScale = new Vector2(size, size);
-        Debug.Log("hoi");
+        lastTime = timer;
+
+        timer += Time.deltaTime;
     }
+
 }
