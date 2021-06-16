@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
         SetShop(GameObject.Find("Buying"), gameManager.crops.allCrops);
-        SetShop(GameObject.Find("Selling"));
+        SetShop(GameObject.Find("Selling"), gameManager.crops.allCrops);
     }
 
     public void StartAnimationBool(Animator newAnimator)
@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
         if (animator.name == "Shop") gameManager.ChangePauseState(GameManager.PauseStates.Change);
     }
 
-    public void SetShop(GameObject parent, Crop crop)
+    public void SetShop(GameObject parent, Crop[] crop)
     {
 
     }
