@@ -30,6 +30,6 @@ public class UIManager : MonoBehaviour
 
     public void SetShop(GameObject parent, Crop[] crop)
     {
-
+        GameObject prefab = parent.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
     }
 }

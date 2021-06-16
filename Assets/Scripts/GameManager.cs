@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public bool isPaused;
 
-    private void Start()
+    private void Awake()
     {
         crops = GameObject.FindObjectOfType<Crops>();
     }
