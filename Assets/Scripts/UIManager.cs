@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
 
     bool isPlaying;
     Animator animator;
+    List<Item> buyItems = new List<Item>();
+    List<Item> sellItems = new List<Item>();
 
     private void Start()
     {
@@ -28,20 +30,29 @@ public class UIManager : MonoBehaviour
         if (animator.name == "Shop") gameManager.ChangePauseState(GameManager.PauseStates.Change);
     }
 
-    public void SetShop(GameObject parent, Item[] crops, int modifier)
+    public void SetShop(GameObject parent, Item[] items, int modifier)
     {
         GameObject prefab = parent.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
         Transform newParent = parent.transform.GetChild(0).GetChild(0);
 
         int size = 0;
 
-        foreach (var crop in crops)
+        Item[] usedArray = null;
+        bool skips;
+        if (modifier >= 0) usedArray = buyItems.ToArray();
+        else if (modifier < 0) usedArray = sellItems.ToArray();
+        foreach (var item in items)
         {
+            skips = false;
+            foreach (var curItem in usedArray) if (curItem.name == item.name) skips = true;
+            if (skips) continue;
             GameObject newShopItem = Instantiate(prefab, newParent);
-            newShopItem.transform.GetChild(0).GetComponent<Image>().sprite = crop.icon;
-            newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(0).GetComponent<Text>().text = crop.name;
-            newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(1).GetComponent<Text>().text = ((int)(crop.price + ((crop.price / 100f) * modifier))).ToString();
+            newShopItem.transform.GetChild(0).GetComponent<Image>().sprite = item.icon;
+            newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(0).GetComponent<Text>().text = item.name;
+            newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(1).GetComponent<Text>().text = ((int)(item.price + ((item.price / 100f) * modifier))).ToString();
             newShopItem.SetActive(true);
+            if (modifier >= 0) buyItems.Add(item);
+            else if (modifier < 0) sellItems.Add(item);
             size += 120;
         }
 

@@ -15,17 +15,11 @@ public class Crops
         new Item ("Pumpkin", 25),
     };
     
-    void Awake()
+    public void Awake()
     {
         foreach (var crop in allCrops)
         {
             crop.icon = Resources.Load<Sprite>($"icons/{crop.name}");
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
