@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public bool isPaused;
 
+    private void Awake()
+    {
+        crops.Awake();
+    }
+
     public enum PauseStates { Paused, Unpaused, Change };
 
     public void ChangePauseState(PauseStates pauseState = PauseStates.Change)
