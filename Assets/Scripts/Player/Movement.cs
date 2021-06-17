@@ -6,8 +6,13 @@ public class Movement : MonoBehaviour
 {
 
     public float moveSpeed;
-    public Rigidbody2D rb2d;
+    private Rigidbody2D rb2d;
     private Vector2 moveDir;
+
+    private void Awake()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+    }
 
     private void Update()
     {
