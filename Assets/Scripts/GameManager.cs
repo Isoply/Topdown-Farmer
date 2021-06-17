@@ -5,14 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [HideInInspector] public Crops crops;
+    [HideInInspector] public Crops crops = new Crops();
 
     [HideInInspector] public bool isPaused;
-
-    private void Awake()
-    {
-        crops = GameObject.FindObjectOfType<Crops>();
-    }
 
     public enum PauseStates { Paused, Unpaused, Change };
 

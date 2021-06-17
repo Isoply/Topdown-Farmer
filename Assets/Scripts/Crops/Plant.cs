@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class Plant : MonoBehaviour
 {
-    public GameObject soil;
-    public GameObject player;
-    public Rigidbody2D rb2d;
+    GameObject soil;
+    GameObject player;
+    Rigidbody2D rb2d;
     public GameObject wheat;
-    public bool soilRange;
+    bool soilRange;
 
     
     // Start is called before the first frame update
     void Start()
     {
-           
+        player = GameObject.FindObjectOfType<Movement>().gameObject;
+        rb2d = player.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -38,24 +39,32 @@ public class Plant : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("player hits soil");
-        Debug.Log("press  to plant");
-        soilRange = true;
+        if (other.name.Substring(0, 4) == "Soil")
+        {
+            Debug.Log("player hits soil");
+            Debug.Log("press  to plant");
+            soil = other.gameObject;
+            soilRange = true;
+        }
     }
 
     public void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log("player out of range");
-        soilRange = false;
+        if (other.name.Substring(0, 4) == "Soil")
+        {
+            Debug.Log("player out of range");
+            soil = null;
+            soilRange = false;
+        }
     }
 
     public void PlantCrop()
     {
-        if (Input.GetKeyDown(KeyCode.E)&& soilRange == true)
+        if (Input.GetKeyDown(KeyCode.E) && soilRange == true && soil.transform.childCount <= 0)
         {
             Debug.Log("plant key clicked");
-            wheat.transform.SetParent(soil.transform.parent);
-            
+            //wheat.transform.SetParent(soil.transform.parent);
+            Instantiate(wheat, soil.transform).transform.position = soil.transform.position;
         }
 
         /*

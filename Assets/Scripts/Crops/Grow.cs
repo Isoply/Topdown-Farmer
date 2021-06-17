@@ -6,18 +6,14 @@ public class Grow : MonoBehaviour
 {
 
     public GameObject plant;
-    public float growSpeed;
-    public float size;
+    public float growSpeed = 0.18f;
+    public float endSize = 1;
+    float curSize = 0.1f;
+    float overwatered = 0.75f;
 
     float timer;
     float lastTime;
-    public bool isGrowing;
-    // Start is called before the first frame update
-    void Start()
-    {
-        growSpeed = 0.18f;
-        size = 0.1f;
-    }
+    bool isGrowing;
 
     // Update is called once per frame
     void Update()
@@ -25,9 +21,10 @@ public class Grow : MonoBehaviour
         if (isGrowing) Growing();
 
 
-        if (timer >= 0.75f)
+        if (timer >= overwatered)
         {
             isGrowing = false;
+            plant.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
             Debug.Log("You gave too much water");
         }
         else if (timer > 0.15f) isGrowing = true;
@@ -37,13 +34,13 @@ public class Grow : MonoBehaviour
     }
     public void Growing()
     {
-        if (size <= 1 && isGrowing == true)
+        if (curSize <= endSize && isGrowing == true)
         {
-            size += growSpeed * Time.deltaTime;
-            plant.transform.localScale = new Vector2(size, size);
+            curSize += growSpeed * Time.deltaTime;
+            plant.transform.localScale = new Vector2(curSize, curSize);
             Debug.Log("Plant is still growing!");
         }
-        if (size >= 1)
+        if (curSize >= endSize)
         {
             Debug.Log("Plant is done growing!");
             timer = 0;

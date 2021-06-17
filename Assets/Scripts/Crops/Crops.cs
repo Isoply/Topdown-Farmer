@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Crops : MonoBehaviour
+public class Crops
 {
     //array
     public Item[] allCrops =
@@ -15,7 +15,7 @@ public class Crops : MonoBehaviour
         new Item ("Pumpkin", 25),
     };
     
-    void Start()
+    void Awake()
     {
         foreach (var crop in allCrops)
         {

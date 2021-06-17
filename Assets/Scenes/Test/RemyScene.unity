@@ -226,8 +226,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 371144819}
-  - component: {fileID: 371144818}
   - component: {fileID: 371144817}
+  - component: {fileID: 371144818}
   m_Layer: 0
   m_Name: Soil
   m_TagString: Untagged
@@ -564,8 +564,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2088670ff163bce45afc54cb1607e860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soil: {fileID: 371144816}
-  player: {fileID: 801965187}
-  rb2d: {fileID: 801965190}
   wheat: {fileID: 515312835}
-  soilRange: 0
