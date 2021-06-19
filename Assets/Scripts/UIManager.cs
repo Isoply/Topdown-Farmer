@@ -51,6 +51,12 @@ public class UIManager : MonoBehaviour
             newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(0).GetComponent<Text>().text = item.name;
             newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(1).GetComponent<Text>().text = ((int)(item.price + ((item.price / 100f) * modifier))).ToString();
             newShopItem.SetActive(true);
+
+            ShopButton newButton = newShopItem.GetComponent<ShopButton>();
+            newButton.gameManager = gameManager;
+            newButton.name = item.name;
+            newButton.amount = (int)(item.price + ((item.price / 100f) * modifier));
+
             if (modifier >= 0) buyItems.Add(item);
             else if (modifier < 0) sellItems.Add(item);
             size += 120;
