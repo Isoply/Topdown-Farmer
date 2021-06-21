@@ -5,13 +5,37 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [HideInInspector] public ItemManager itemManager;
+    [HideInInspector] public UIManager UIManager;
+    [HideInInspector] public Player player;
+    [HideInInspector] public Grow grow;
+    [HideInInspector] public CreateCrop createCrop;
+
     [HideInInspector] public Crops crops = new Crops();
 
     [HideInInspector] public bool isPaused;
 
+    public delegate void Event();
+    public Event LateStart = delegate { };
+    float timer = 0;
+
     private void Awake()
     {
+        itemManager = GetComponent<ItemManager>();
+        UIManager = GetComponent<UIManager>();
+        player = GameObject.FindObjectOfType<Player>();
+        createCrop = GameObject.FindObjectOfType<CreateCrop>();
         crops.Awake();
+    }
+
+    private void Update()
+    {
+        if (timer <= 0.005f && timer != -1) timer += Time.deltaTime;
+        if (timer >= 0.005f)
+        {
+            LateStart();
+            timer = -1;
+        }
     }
 
     public enum PauseStates { Paused, Unpaused, Change };
@@ -30,7 +54,7 @@ public class GameManager : MonoBehaviour
 
     public void Quit()
     {
-        if (UnityEditor.EditorApplication.isPlaying) UnityEditor.EditorApplication.isPlaying = false;
-        else Application.Quit();
+        //if (UnityEditor.EditorApplication.isPlaying) UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
     }
 }
