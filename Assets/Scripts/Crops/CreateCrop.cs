@@ -7,7 +7,7 @@ public class CreateCrop : MonoBehaviour
     Player player;
 
     GameObject soil;
-    public GameObject Crop;
+    public GameObject crop;
     public bool soilRange;
 
     private void Start()
@@ -25,8 +25,6 @@ public class CreateCrop : MonoBehaviour
     {
         if (other.name.Substring(0, 4) == "Soil")
         {
-            Debug.Log("player hits soil");
-            Debug.Log("press  to plant");
             soil = other.gameObject;
             soilRange = true;
         }
@@ -36,7 +34,6 @@ public class CreateCrop : MonoBehaviour
     {
         if (other.name.Substring(0, 4) == "Soil")
         {
-            Debug.Log("player out of range");
             soil = null;
             soilRange = false;
         }
@@ -44,22 +41,11 @@ public class CreateCrop : MonoBehaviour
 
     public void PlantCrop()
     {
-        if (Input.GetKeyDown(KeyCode.E) && soilRange == true && soil.transform.childCount <= 0)
+        if (Input.GetKeyDown(KeyCode.E) && soilRange == true && soil.transform.childCount <= 0 && player.playerControl.curCrop != null)
         {
-            Debug.Log("plant key clicked");
-            //wheat.transform.SetParent(soil.transform.parent);
-            GameObject newCrop = Instantiate(Crop, soil.transform);
+            GameObject newCrop = Instantiate(crop, soil.transform);
             newCrop.transform.position = soil.transform.position;
             newCrop.GetComponent<Grow>().type = player.playerControl.curCrop;
         }
-
-        /*
-        if (f is pressed && wheat picked)
-        {
-            Plant what ur holding
-        }
-        else
-        tell player to get a crop
-        */
     }
 }

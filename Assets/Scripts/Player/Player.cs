@@ -8,11 +8,10 @@ public class Player : MonoBehaviour
 
     [HideInInspector] public PlayerController playerControl;
 
-    [HideInInspector] public int money;
+    [HideInInspector] public int money = 0;
 
     private void Awake()
     {
-        money = 10000;
         gameManager = GameObject.FindObjectOfType<GameManager>();
         playerControl = GetComponent<PlayerController>();
     }

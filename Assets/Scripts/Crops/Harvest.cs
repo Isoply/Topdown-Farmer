@@ -26,23 +26,15 @@ public class Harvest : MonoBehaviour
 
     public void HarvestCrop()
     {
-     
-
         if (grow.curSize >= grow.endSize && gameManager.createCrop.soilRange == true)
         {
-            Debug.Log("harvest it ya cunt press R");
-
             if (Input.GetKeyDown(KeyCode.R))
             {
-                
                 gameManager.itemManager.ChangeItemAmount(grow.type.item.name, Random.Range(1, gameManager.crops.FindCrop(grow.type.item.name).maxRange));
                 Destroy(grow.gameObject);
                 Debug.Log($"your amount of {grow.type.item.name}: {gameManager.itemManager.CheckItemAmount(grow.type.item.name)}");
             }
-            
-
         }
-        
     }
 
     private void OnTriggerEnter2D(Collider2D other)

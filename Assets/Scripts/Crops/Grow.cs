@@ -24,7 +24,6 @@ public class Grow : MonoBehaviour
         {
             isGrowing = false;
             GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
-            Debug.Log("You gave too much water");
         }
         else if (timer > 0.15f) isGrowing = true;
 
@@ -37,14 +36,11 @@ public class Grow : MonoBehaviour
         {
             curSize += growSpeed * Time.deltaTime;
             transform.localScale = new Vector2(curSize, curSize);
-            Debug.Log("Plant is still growing!");
         }
         if (curSize >= endSize)
         {
-            Debug.Log("Plant is done growing!");
             timer = 0;
             isGrowing = false;
-
         }
     }
 
