@@ -27,8 +27,9 @@ public class UIManager : MonoBehaviour
     private void LateStart()
     {
         invSlots[0].moneyText = invSlots[0].gameObject.transform.parent.Find("Money").GetComponentInChildren<Text>();
-        invSlots[0].allSlots = CreateInventory(gameManager.UIManager.invSlots[0].gameObject);
+        invSlots[0].allSlots = CreateInventory(gameManager.UIManager.invSlots[0].gameObject, gameManager.itemManager.allSlots.ToArray());
         UpdateInventory();
+        //gameManager.crops.allCrops[0].item
     }
 
     public void StartAnimationBool(Animator newAnimator)
@@ -82,13 +83,14 @@ public class UIManager : MonoBehaviour
         newParent.GetComponent<RectTransform>().sizeDelta = new Vector2(size, newParent.GetComponent<RectTransform>().sizeDelta.y);
     }
 
-    public InventorySlot[] CreateInventory(GameObject parent)
+    public InventorySlot[] CreateInventory(GameObject parent, Slot[] items)
     {
         GameObject prefab = parent.transform.GetChild(0).gameObject;
         List<InventorySlot> slots = new List<InventorySlot>();
-        foreach (var item in gameManager.itemManager.allSlots)
+        foreach (var item in items)
         {
             InventorySlot newSlot = new InventorySlot(Instantiate(prefab, parent.transform));
+            newSlot.gameObject.SetActive(true);
             newSlot.GetVariables();
             UpdateSlot(newSlot, item);
             newSlot.text.text = item.amount.ToString();

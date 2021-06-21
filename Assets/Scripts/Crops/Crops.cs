@@ -33,6 +33,16 @@ public class Crops
         }
         return null;
     }
+
+    public Item[] ToItems()
+    {
+        List<Item> items = new List<Item>();
+        foreach (var crop in allCrops)
+        {
+            items.Add(crop.item);
+        }
+        return items.ToArray();
+    }
 }
 
 public class Crop

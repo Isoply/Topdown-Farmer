@@ -50,6 +50,7 @@ public class Slot
 {
     public string name;
     public int amount;
+    public Item[] Recepe;
 
     public Slot(string _name, int _amount)
     {
