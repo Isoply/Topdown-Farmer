@@ -17,8 +17,8 @@ public class UIManager : MonoBehaviour
     {
         GameObject HUD = GameObject.Find("HUD");
         gameManager = GameObject.FindObjectOfType<GameManager>();
-        SetShop(GameObject.Find("Buying"), gameManager.crops.allCrops, 5);
-        SetShop(GameObject.Find("Selling"), gameManager.crops.allCrops, -5);
+        SetShop(GameObject.Find("Buying"), gameManager.crops.ToItems(), 5);
+        SetShop(GameObject.Find("Selling"), gameManager.crops.ToItems(), -5);
 
         invSlots.Add(new Inventory(HUD.transform.Find("Shop").Find("Header").Find("Inventory").gameObject));
         gameManager.LateStart += LateStart;
@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
         invSlots[0].moneyText = invSlots[0].gameObject.transform.parent.Find("Money").GetComponentInChildren<Text>();
         invSlots[0].allSlots = CreateInventory(gameManager.UIManager.invSlots[0].gameObject, gameManager.itemManager.allSlots.ToArray());
         UpdateInventory();
-        //gameManager.crops.allCrops[0].item
+        gameManager.crops.ToItems();
     }
 
     public void StartAnimationBool(Animator newAnimator)
@@ -43,7 +43,7 @@ public class UIManager : MonoBehaviour
         if (animator.name == "Shop") gameManager.ChangePauseState(GameManager.PauseStates.Change);
     }
 
-    public void SetShop(GameObject parent, Crop[] crops, int modifier)
+    public void SetShop(GameObject parent, Item[] items, int modifier)
     {
         GameObject prefab = parent.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
         Transform newParent = parent.transform.GetChild(0).GetChild(0);
@@ -54,15 +54,15 @@ public class UIManager : MonoBehaviour
         bool skips;
         if (modifier >= 0) usedArray = buyItems.ToArray();
         else if (modifier < 0) usedArray = sellItems.ToArray();
-        foreach (var crop in crops)
+        foreach (var item in items)
         {
             skips = false;
-            foreach (var curItem in usedArray) if (curItem.name == crop.item.name) skips = true;
+            foreach (var curItem in usedArray) if (curItem.name == item.name) skips = true;
             if (skips) continue;
             GameObject newShopItem = Instantiate(prefab, newParent);
-            newShopItem.transform.GetChild(0).GetComponent<Image>().sprite = crop.item.icon;
-            newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(0).GetComponent<Text>().text = crop.item.name;
-            newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(1).GetComponent<Text>().text = ((int)(crop.item.price + ((crop.item.price / 100f) * modifier))).ToString() + "$";
+            newShopItem.transform.GetChild(0).GetComponent<Image>().sprite = item.icon;
+            newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(0).GetComponent<Text>().text = item.name;
+            newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(1).GetComponent<Text>().text = ((int)(item.price + ((item.price / 100f) * modifier))).ToString() + "$";
             if (modifier >= 0) newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(1).GetComponent<Text>().color = Color.red;
             else if (modifier < 0) newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(1).GetComponent<Text>().color = Color.green;
             newShopItem.SetActive(true);
@@ -71,12 +71,12 @@ public class UIManager : MonoBehaviour
             if (newButton != null)
             {
                 newButton.gameManager = gameManager;
-                newButton.name = crop.item.name;
-                newButton.amount = modifier * (int)(crop.item.price + ((crop.item.price / 100f) * modifier));
+                newButton.name = item.name;
+                newButton.amount = modifier * (int)(item.price + ((item.price / 100f) * modifier));
             }
 
-            if (modifier >= 0) buyItems.Add(crop.item);
-            else if (modifier < 0) sellItems.Add(crop.item);
+            if (modifier >= 0) buyItems.Add(item);
+            else if (modifier < 0) sellItems.Add(item);
             size += 120;
         }
 
