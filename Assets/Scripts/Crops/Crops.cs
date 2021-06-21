@@ -7,12 +7,12 @@ public class Crops
     //array
     public Crop[] allCrops =
     {
-        new Crop(new Item("Wheat", 3), 3),
-        new Crop(new Item ("Carrots", 9)),
-        new Crop(new Item ("Corn", 12)),
-        new Crop(new Item ("Potatoes", 16)),
-        new Crop(new Item ("Cauliflower", 20)),
-        new Crop(new Item ("Pumpkin", 25)),
+        new Crop(new Item("Wheat", 3), 2),
+        new Crop(new Item ("Carrots", 9), 3),
+        new Crop(new Item ("Corn", 12), 4),
+        new Crop(new Item ("Potatoes", 16), 6),
+        new Crop(new Item ("Cauliflower", 20), 7),
+        new Crop(new Item ("Pumpkin", 25), 8),
     };
 
     

@@ -4,18 +4,15 @@ using UnityEngine;
 
 public class CreateCrop : MonoBehaviour
 {
+    Player player;
+
     GameObject soil;
-    GameObject player;
-    Rigidbody2D rb2d;
-    public GameObject wheat;
+    public GameObject Crop;
     public bool soilRange;
 
-    
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        player = GameObject.FindObjectOfType<Movement>().gameObject;
-        rb2d = player.GetComponent<Rigidbody2D>();
+        player = GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -23,8 +20,6 @@ public class CreateCrop : MonoBehaviour
     {
         PlantCrop();
     }
-
-    
 
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -53,7 +48,9 @@ public class CreateCrop : MonoBehaviour
         {
             Debug.Log("plant key clicked");
             //wheat.transform.SetParent(soil.transform.parent);
-            Instantiate(wheat, soil.transform).transform.position = soil.transform.position;
+            GameObject newCrop = Instantiate(Crop, soil.transform);
+            newCrop.transform.position = soil.transform.position;
+            newCrop.GetComponent<Grow>().type = player.playerControl.curCrop;
         }
 
         /*

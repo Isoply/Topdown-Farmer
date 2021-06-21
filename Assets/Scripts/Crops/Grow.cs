@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Grow : MonoBehaviour
 {
-
-    public GameObject plant;
+    [HideInInspector] public Crop type;
     public float growSpeed = 0.18f;
     public float endSize = 1;
     [HideInInspector] public float curSize = 0.1f;
@@ -24,7 +23,7 @@ public class Grow : MonoBehaviour
         if (timer >= overwatered)
         {
             isGrowing = false;
-            plant.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
+            GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
             Debug.Log("You gave too much water");
         }
         else if (timer > 0.15f) isGrowing = true;
@@ -37,7 +36,7 @@ public class Grow : MonoBehaviour
         if (curSize <= endSize && isGrowing == true)
         {
             curSize += growSpeed * Time.deltaTime;
-            plant.transform.localScale = new Vector2(curSize, curSize);
+            transform.localScale = new Vector2(curSize, curSize);
             Debug.Log("Plant is still growing!");
         }
         if (curSize >= endSize)

@@ -9,7 +9,6 @@ public class Harvest : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
-        Debug.Log("your amount of wheat " + gameManager.itemManager.CheckItemAmount("wheat"));
     }
 
 
@@ -36,9 +35,9 @@ public class Harvest : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R))
             {
                 
-                gameManager.itemManager.ChangeItemAmount("Wheat", Random.Range(1, gameManager.crops.FindCrop("Wheat").maxRange));
+                gameManager.itemManager.ChangeItemAmount(grow.type.item.name, Random.Range(1, gameManager.crops.FindCrop(grow.type.item.name).maxRange));
                 Destroy(grow.gameObject);
-                Debug.Log("your amount of wheat " + gameManager.itemManager.CheckItemAmount("Wheat"));
+                Debug.Log($"your amount of {grow.type.item.name}: {gameManager.itemManager.CheckItemAmount(grow.type.item.name)}");
             }
             
 
