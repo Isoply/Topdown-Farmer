@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
 
         invSlots.Add(new Inventory(HUD.transform.Find("Shop").Find("Header").Find("Inventory").gameObject));
         invSlots[0].moneyText = invSlots[0].gameObject.transform.parent.Find("Money").GetComponent<Text>();
+        invSlots[0].allSlots = CreateInventory(gameManager.UIManager.invSlots[0].gameObject);
     }
 
     public void StartAnimationBool(Animator newAnimator)
