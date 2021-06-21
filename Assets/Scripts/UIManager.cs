@@ -9,9 +9,9 @@ public class UIManager : MonoBehaviour
 
     bool isPlaying;
     Animator animator;
-    List<Item> buyItems = new List<Item>();
-    List<Item> sellItems = new List<Item>();
-    List<GameObject> invSlots = new List<GameObject>();
+    [HideInInspector] public List<Item> buyItems = new List<Item>();
+    [HideInInspector] public List<Item> sellItems = new List<Item>();
+    [HideInInspector] public List<Inventory> invSlots = new List<Inventory>();
 
     private void Start()
     {
@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
         SetShop(GameObject.Find("Buying"), gameManager.crops.allCrops, 5);
         SetShop(GameObject.Find("Selling"), gameManager.crops.allCrops, -5);
 
-        invSlots.Add(HUD.transform.Find("Shop").Find("Header").Find("Inventory").gameObject);
+        invSlots.Add(new Inventory(HUD.transform.Find("Shop").Find("Header").Find("Inventory").gameObject));
     }
 
     public void StartAnimationBool(Animator newAnimator)
@@ -72,40 +72,79 @@ public class UIManager : MonoBehaviour
         newParent.GetComponent<RectTransform>().sizeDelta = new Vector2(size, newParent.GetComponent<RectTransform>().sizeDelta.y);
     }
 
-    public void CreateInventory(GameObject parent)
+    public InventorySlot[] CreateInventory(GameObject parent)
     {
-        
+        GameObject prefab = parent.transform.GetChild(0).gameObject;
+        List<InventorySlot> slots = new List<InventorySlot>();
+        foreach (var item in gameManager.itemManager.allSlots)
+        {
+            InventorySlot newSlot = new InventorySlot(Instantiate(prefab, parent.transform));
+            newSlot.GetVariables();
+            UpdateSlot(newSlot, item);
+            newSlot.text.text = item.amount.ToString();
+            newSlot.icon.sprite = gameManager.crops.FindCrop(item.name).icon;
+            newSlot.gameObject.name = item.name;
+            slots.Add(newSlot);
+        }
+        return slots.ToArray();
     }
 
     public void UpdateInventory()
     {
+        foreach (var curInv in invSlots)
+        {
+            foreach (var curSlot in curInv.allSlots)
+            {
+                UpdateSlot(curSlot, gameManager.itemManager.FindSlot(curSlot.gameObject.name));
+            }
+        }
+    }
 
+    void UpdateSlot(InventorySlot slot, Slot item)
+    {
+        slot.text.text = item.amount.ToString();
+        slot.icon.sprite = gameManager.crops.FindCrop(item.name).icon;
+        slot.gameObject.name = item.name;
     }
 }
 
-class Inventory
+public class Inventory
+{
+    public GameObject gameObject;
+    public InventorySlot[] allSlots;
+
+    public Inventory(GameObject _gameObject)
+    {
+        gameObject = _gameObject;
+    }
+}
+
+public class InventorySlot
 {
     public GameObject parent;
+    public GameObject gameObject;
     public Text text;
     public Image icon;
 
-    public Inventory(GameObject _parent)
+    public InventorySlot(GameObject _gameObject)
     {
-        parent = _parent;
+        gameObject = _gameObject;
     }
 
-    public Inventory(GameObject _parent, Text _text, Image _icon)
+    public InventorySlot(GameObject _gameObject, Text _text, Image _icon)
     {
-        parent = _parent;
+        gameObject = _gameObject;
         text = _text;
         icon = _icon;
     }
 
     public bool GetVariables()
     {
-        if (parent != null)
+        if (gameObject != null)
         {
-
+            text = gameObject.transform.GetComponentInChildren<Text>();
+            if (gameObject.transform.GetComponentsInChildren<Image>().Length > 0) icon = gameObject.transform.GetComponentsInChildren<Image>()[1];
+            else icon = gameObject.transform.GetComponentInChildren<Image>();
             return true;
         }
         else return false;

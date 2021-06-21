@@ -22,4 +22,13 @@ public class Crops
             crop.icon = Resources.Load<Sprite>($"icons/{crop.name}");
         }
     }
+
+    public Item FindCrop(string name)
+    {
+        foreach (var crop in allCrops)
+        {
+            if (crop.name == name) return crop;
+        }
+        return null;
+    }
 }

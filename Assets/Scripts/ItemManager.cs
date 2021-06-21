@@ -6,7 +6,7 @@ public class ItemManager : MonoBehaviour
 {
     GameManager gameManager;
 
-    List<Slot> allSlots = new List<Slot>();
+    public List<Slot> allSlots = new List<Slot>();
 
     void Start()
     {
@@ -16,6 +16,7 @@ public class ItemManager : MonoBehaviour
         {
             allSlots.Add(new Slot(crop.name, 0));
         }
+        gameManager.UIManager.invSlots[0].allSlots = gameManager.UIManager.CreateInventory(gameManager.UIManager.invSlots[0].gameObject);
     }
 
     public void ChangeItemAmount(string itemName, int amount)
@@ -35,9 +36,18 @@ public class ItemManager : MonoBehaviour
         }
         return 0;
     } 
+
+    public Slot FindSlot(string name)
+    {
+        foreach (var slot in allSlots)
+        {
+            if (slot.name == name) return slot;
+        }
+        return null;
+    }
 }
 
-class Slot
+public class Slot
 {
     public string name;
     public int amount;
