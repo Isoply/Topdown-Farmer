@@ -13,10 +13,7 @@ public class Harvest : MonoBehaviour
     }
 
 
-    /*gebruik de endsize variable uit grow voor checken met harvest
-      gebruik de range voor check met harvest
-      knop voor harvesten
-    */
+    
 
     
     void Update()
@@ -38,9 +35,10 @@ public class Harvest : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.R))
             {
-                gameManager.itemManager.ChangeItemAmount("Wheat", Random.Range(1, 3));
+                
+                gameManager.itemManager.ChangeItemAmount("Wheat", Random.Range(1, gameManager.crops.FindCrop("Wheat").maxRange));
                 Destroy(grow.gameObject);
-                Debug.Log("your amount of wheat " + gameManager.itemManager.CheckItemAmount("wheat"));
+                Debug.Log("your amount of wheat " + gameManager.itemManager.CheckItemAmount("Wheat"));
             }
             
 
