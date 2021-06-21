@@ -11,12 +11,16 @@ public class UIManager : MonoBehaviour
     Animator animator;
     List<Item> buyItems = new List<Item>();
     List<Item> sellItems = new List<Item>();
+    List<GameObject> invSlots = new List<GameObject>();
 
     private void Start()
     {
+        GameObject HUD = GameObject.Find("HUD");
         gameManager = GameObject.FindObjectOfType<GameManager>();
         SetShop(GameObject.Find("Buying"), gameManager.crops.allCrops, 5);
         SetShop(GameObject.Find("Selling"), gameManager.crops.allCrops, -5);
+
+        invSlots.Add(HUD.transform.Find("Shop").Find("Header").Find("Inventory").gameObject);
     }
 
     public void StartAnimationBool(Animator newAnimator)
@@ -53,9 +57,12 @@ public class UIManager : MonoBehaviour
             newShopItem.SetActive(true);
 
             ShopButton newButton = newShopItem.GetComponent<ShopButton>();
-            newButton.gameManager = gameManager;
-            newButton.name = item.name;
-            newButton.amount = (int)(item.price + ((item.price / 100f) * modifier));
+            if (newButton != null)
+            {
+                newButton.gameManager = gameManager;
+                newButton.name = item.name;
+                newButton.amount = (int)(item.price + ((item.price / 100f) * modifier));
+            }
 
             if (modifier >= 0) buyItems.Add(item);
             else if (modifier < 0) sellItems.Add(item);
@@ -64,4 +71,44 @@ public class UIManager : MonoBehaviour
 
         newParent.GetComponent<RectTransform>().sizeDelta = new Vector2(size, newParent.GetComponent<RectTransform>().sizeDelta.y);
     }
+
+    public void CreateInventory(GameObject parent)
+    {
+        
+    }
+
+    public void UpdateInventory()
+    {
+
+    }
 }
+
+class Inventory
+{
+    public GameObject parent;
+    public Text text;
+    public Image icon;
+
+    public Inventory(GameObject _parent)
+    {
+        parent = _parent;
+    }
+
+    public Inventory(GameObject _parent, Text _text, Image _icon)
+    {
+        parent = _parent;
+        text = _text;
+        icon = _icon;
+    }
+
+    public bool GetVariables()
+    {
+        if (parent != null)
+        {
+
+            return true;
+        }
+        else return false;
+    }
+}
+
