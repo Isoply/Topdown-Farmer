@@ -24,6 +24,11 @@ public class GameManager : MonoBehaviour
         crops.Awake();
     }
 
+    private void Update()
+    {
+        
+    }
+
     public enum PauseStates { Paused, Unpaused, Change };
 
     public void ChangePauseState(PauseStates pauseState = PauseStates.Change)

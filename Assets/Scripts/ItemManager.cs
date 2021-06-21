@@ -14,9 +14,8 @@ public class ItemManager : MonoBehaviour
 
         foreach (var crop in gameManager.crops.allCrops)
         {
-            allSlots.Add(new Slot(crop.name, 0));
+            allSlots.Add(new Slot(crop.item.name, 0));
         }
-        gameManager.UIManager.invSlots[0].allSlots = gameManager.UIManager.CreateInventory(gameManager.UIManager.invSlots[0].gameObject);
     }
 
     public void ChangeItemAmount(string itemName, int amount)

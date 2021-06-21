@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour
         if (animator.name == "Shop") gameManager.ChangePauseState(GameManager.PauseStates.Change);
     }
 
-    public void SetShop(GameObject parent, Item[] items, int modifier)
+    public void SetShop(GameObject parent, Crop[] crops, int modifier)
     {
         GameObject prefab = parent.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
         Transform newParent = parent.transform.GetChild(0).GetChild(0);
@@ -47,27 +47,27 @@ public class UIManager : MonoBehaviour
         bool skips;
         if (modifier >= 0) usedArray = buyItems.ToArray();
         else if (modifier < 0) usedArray = sellItems.ToArray();
-        foreach (var item in items)
+        foreach (var crop in crops)
         {
             skips = false;
-            foreach (var curItem in usedArray) if (curItem.name == item.name) skips = true;
+            foreach (var curItem in usedArray) if (curItem.name == crop.item.name) skips = true;
             if (skips) continue;
             GameObject newShopItem = Instantiate(prefab, newParent);
-            newShopItem.transform.GetChild(0).GetComponent<Image>().sprite = item.icon;
-            newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(0).GetComponent<Text>().text = item.name;
-            newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(1).GetComponent<Text>().text = ((int)(item.price + ((item.price / 100f) * modifier))).ToString();
+            newShopItem.transform.GetChild(0).GetComponent<Image>().sprite = crop.item.icon;
+            newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(0).GetComponent<Text>().text = crop.item.name;
+            newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(1).GetComponent<Text>().text = ((int)(crop.item.price + ((crop.item.price / 100f) * modifier))).ToString();
             newShopItem.SetActive(true);
 
             ShopButton newButton = newShopItem.GetComponent<ShopButton>();
             if (newButton != null)
             {
                 newButton.gameManager = gameManager;
-                newButton.name = item.name;
-                newButton.amount = (int)(item.price + ((item.price / 100f) * modifier));
+                newButton.name = crop.item.name;
+                newButton.amount = (int)(crop.item.price + ((crop.item.price / 100f) * modifier));
             }
 
-            if (modifier >= 0) buyItems.Add(item);
-            else if (modifier < 0) sellItems.Add(item);
+            if (modifier >= 0) buyItems.Add(crop.item);
+            else if (modifier < 0) sellItems.Add(crop.item);
             size += 120;
         }
 
@@ -84,7 +84,7 @@ public class UIManager : MonoBehaviour
             newSlot.GetVariables();
             UpdateSlot(newSlot, item);
             newSlot.text.text = item.amount.ToString();
-            newSlot.icon.sprite = gameManager.crops.FindCrop(item.name).icon;
+            newSlot.icon.sprite = gameManager.crops.FindCrop(item.name).item.icon;
             newSlot.gameObject.name = item.name;
             slots.Add(newSlot);
         }
@@ -106,7 +106,7 @@ public class UIManager : MonoBehaviour
     void UpdateSlot(InventorySlot slot, Slot item)
     {
         slot.text.text = item.amount.ToString();
-        slot.icon.sprite = gameManager.crops.FindCrop(item.name).icon;
+        slot.icon.sprite = gameManager.crops.FindCrop(item.name).item.icon;
         slot.gameObject.name = item.name;
     }
 }
