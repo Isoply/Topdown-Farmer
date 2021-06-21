@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public UIManager UIManager;
     [HideInInspector] public Player player;
     [HideInInspector] public Grow grow;
-    [HideInInspector] public CreateCrop createCrop;
 
     [HideInInspector] public Crops crops = new Crops();
 
@@ -24,7 +23,6 @@ public class GameManager : MonoBehaviour
         itemManager = GetComponent<ItemManager>();
         UIManager = GetComponent<UIManager>();
         player = GameObject.FindObjectOfType<Player>();
-        createCrop = GameObject.FindObjectOfType<CreateCrop>();
         crops.Awake();
     }
 
