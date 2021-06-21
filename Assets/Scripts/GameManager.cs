@@ -30,8 +30,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (timer <= 0.25f && timer != -1) timer += Time.deltaTime;
-        if (timer >= 0.25f)
+        if (timer <= 0.005f && timer != -1) timer += Time.deltaTime;
+        if (timer >= 0.005f)
         {
             LateStart();
             timer = -1;

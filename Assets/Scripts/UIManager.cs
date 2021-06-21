@@ -16,18 +16,21 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         GameObject HUD = GameObject.Find("HUD");
+        invSlots.Add(new Inventory(HUD.transform.Find("Shop").Find("Header").Find("Inventory").gameObject));
+        invSlots.Add(new Inventory(HUD.transform.Find("Player").Find("Inventory").gameObject));
+
         gameManager = GameObject.FindObjectOfType<GameManager>();
         SetShop(GameObject.Find("Buying"), gameManager.crops.ToItems(), 5);
         SetShop(GameObject.Find("Selling"), gameManager.crops.ToItems(), -5);
 
-        invSlots.Add(new Inventory(HUD.transform.Find("Shop").Find("Header").Find("Inventory").gameObject));
         gameManager.LateStart += LateStart;
     }
 
     private void LateStart()
     {
         invSlots[0].moneyText = invSlots[0].gameObject.transform.parent.Find("Money").GetComponentInChildren<Text>();
-        invSlots[0].allSlots = CreateInventory(gameManager.UIManager.invSlots[0].gameObject, gameManager.itemManager.allSlots.ToArray());
+        invSlots[0].allSlots = CreateInventory(invSlots[0].gameObject, gameManager.itemManager.allSlots.ToArray());
+        invSlots[1].allSlots = CreateInventory(invSlots[1].gameObject, gameManager.itemManager.allSlots.ToArray());
         UpdateInventory();
         gameManager.crops.ToItems();
     }
@@ -108,7 +111,7 @@ public class UIManager : MonoBehaviour
             foreach (var curSlot in curInv.allSlots)
             {
                 UpdateSlot(curSlot, gameManager.itemManager.FindSlot(curSlot.gameObject.name));
-                curInv.moneyText.text = $"{gameManager.player.money} $";
+                if (curInv.moneyText != null) curInv.moneyText.text = $"{gameManager.player.money} $";
             }
         }
     }

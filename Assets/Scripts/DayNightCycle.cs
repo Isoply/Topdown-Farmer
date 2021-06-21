@@ -19,7 +19,7 @@ public class DayNightCycle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        display = GameObject.Find("Time").GetComponent<Text>();
+        display = GameObject.Find("Time").GetComponentInChildren<Text>();
         overlay = GameObject.Find("Overlay").GetComponent<Image>();
         if (time >= 5 && time <= 50) overlay.color = new Color32(255, 100, 0, (byte)opacity);
         if (time < 5) overlay.color = new Color32(0, 100, 255, (byte)opacity);
