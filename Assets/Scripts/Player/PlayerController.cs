@@ -44,7 +44,6 @@ public class PlayerController : MonoBehaviour
             {
                 player.gameManager.itemManager.ChangeItemAmount(grow.type.item.name, Random.Range(1, player.gameManager.crops.FindCrop(grow.type.item.name).maxRange));
                 Destroy(grow.gameObject);
-                Debug.Log($"your amount of {grow.type.item.name}: {player.gameManager.itemManager.CheckItemAmount(grow.type.item.name)}");
             }
         }
     }
@@ -69,6 +68,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.GetComponent<Grow>()) grow = other.GetComponent<Grow>();
         if (other.name.Substring(0, 4) == "Soil")
         {
             soil = other.gameObject;
