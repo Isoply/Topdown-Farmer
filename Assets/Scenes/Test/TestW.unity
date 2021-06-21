@@ -452,6 +452,7 @@ GameObject:
   - component: {fileID: 334670395}
   - component: {fileID: 334670394}
   - component: {fileID: 334670396}
+  - component: {fileID: 334670397}
   m_Layer: 5
   m_Name: Template
   m_TagString: Untagged
@@ -559,7 +560,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2093866495}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 334670397}
+        m_MethodName: ClickButton
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &334670397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334670392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e524f63c762214ca9b87cd5dcb589c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  name: 
+  amount: 0
 --- !u!1 &351324112
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,6 +1082,7 @@ GameObject:
   - component: {fileID: 703315457}
   - component: {fileID: 703315456}
   - component: {fileID: 703315455}
+  - component: {fileID: 703315458}
   m_Layer: 5
   m_Name: Template
   m_TagString: Untagged
@@ -1125,7 +1153,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 959429553}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 703315458}
+        m_MethodName: ClickButton
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: -1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &703315456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1163,6 +1202,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 703315453}
   m_CullTransparentMesh: 0
+--- !u!114 &703315458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703315453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e524f63c762214ca9b87cd5dcb589c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  name: 
+  amount: 0
 --- !u!1 &738179017
 GameObject:
   m_ObjectHideFlags: 0
@@ -2152,6 +2206,7 @@ GameObject:
   - component: {fileID: 1580016495}
   - component: {fileID: 1580016496}
   - component: {fileID: 1580016498}
+  - component: {fileID: 1580016497}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2216,7 +2271,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09168b09a8e01814f96a7a44cd5d4dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemManager: {fileID: 0}
+  UIManager: {fileID: 0}
+  player: {fileID: 0}
   isPaused: 0
+--- !u!114 &1580016497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580016492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be983856ba7e75f4988108a810e9740c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1580016498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2871,6 +2941,7 @@ GameObject:
   - component: {fileID: 2001865512}
   - component: {fileID: 2001865511}
   - component: {fileID: 2001865514}
+  - component: {fileID: 2001865515}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2977,6 +3048,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
+--- !u!114 &2001865515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001865510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e9e7480b74b1542b28164f8fd46845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  money: 0
 --- !u!1 &2012399521
 GameObject:
   m_ObjectHideFlags: 0

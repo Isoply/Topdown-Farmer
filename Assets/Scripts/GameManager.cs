@@ -5,12 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [HideInInspector] public ItemManager itemManager;
+    [HideInInspector] public UIManager UIManager;
+    [HideInInspector] public Player player;
+    [HideInInspector] public Grow grow;
+    [HideInInspector] public Plant plant;
+
     [HideInInspector] public Crops crops = new Crops();
 
     [HideInInspector] public bool isPaused;
 
     private void Awake()
     {
+        itemManager = GetComponent<ItemManager>();
+        UIManager = GetComponent<UIManager>();
+        player = GameObject.FindObjectOfType<Player>();
         crops.Awake();
     }
 
@@ -30,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     public void Quit()
     {
-        if (UnityEditor.EditorApplication.isPlaying) UnityEditor.EditorApplication.isPlaying = false;
-        else Application.Quit();
+        //if (UnityEditor.EditorApplication.isPlaying) UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
     }
 }
