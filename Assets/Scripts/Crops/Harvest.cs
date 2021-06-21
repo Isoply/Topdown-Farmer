@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Harvest : MonoBehaviour
 {
-   
+    GameManager gameManager;
     void Start()
     {
-        
+        gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 
 
@@ -19,7 +19,7 @@ public class Harvest : MonoBehaviour
     
     void Update()
     {
-        
+        HarvestCrop();
     }
 
     public void HarvestCrop()
@@ -28,6 +28,13 @@ public class Harvest : MonoBehaviour
         if (endsize == 1 && soilrange == true)
         {
             press f to harvest
+        }
+        
+
+        if (gameManager.grow.curSize >= gameManager.grow.endSize && gameManager.plant.soilRange == true)
+        {
+            Debug.Log("harvest it ya cunt");
+
         }
         */
     }

@@ -8,7 +8,7 @@ public class Plant : MonoBehaviour
     GameObject player;
     Rigidbody2D rb2d;
     public GameObject wheat;
-    bool soilRange;
+    public bool soilRange;
 
     
     // Start is called before the first frame update
@@ -24,18 +24,7 @@ public class Plant : MonoBehaviour
         PlantCrop();
     }
 
-    public void SoilCheck()
-    {
-        
-
-        /*if (player = in range of ground)
-        {
-            show f
-                if f pressed
-                    plant
-        }
-        */
-    }
+    
 
     public void OnTriggerEnter2D(Collider2D other)
     {
