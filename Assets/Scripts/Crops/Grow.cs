@@ -8,7 +8,7 @@ public class Grow : MonoBehaviour
     public GameObject plant;
     public float growSpeed = 0.18f;
     public float endSize = 1;
-    float curSize = 0.1f;
+    [HideInInspector] public float curSize = 0.1f;
     float overwatered = 0.75f;
 
     float timer;
