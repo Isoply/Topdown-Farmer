@@ -24,7 +24,7 @@ public class ItemManager : MonoBehaviour
         {
             if (slot.name == itemName) slot.amount += amount;
         }
-        UpdateDisplay();
+        gameManager.UIManager.UpdateInventory();
     }
 
     public int CheckItemAmount(string itemName)
@@ -35,14 +35,6 @@ public class ItemManager : MonoBehaviour
         }
         return 0;
     } 
-
-    void UpdateDisplay()
-    {
-        foreach (var slot in allSlots)
-        {
-            //Update UI amounts
-        }
-    }
 }
 
 class Slot
