@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
         SetShop(GameObject.Find("Selling"), gameManager.crops.allCrops, -5);
 
         invSlots.Add(new Inventory(HUD.transform.Find("Shop").Find("Header").Find("Inventory").gameObject));
+        invSlots[0].moneyText = invSlots[0].gameObject.transform.parent.Find("Money").GetComponent<Text>();
     }
 
     public void StartAnimationBool(Animator newAnimator)
@@ -96,6 +97,7 @@ public class UIManager : MonoBehaviour
             foreach (var curSlot in curInv.allSlots)
             {
                 UpdateSlot(curSlot, gameManager.itemManager.FindSlot(curSlot.gameObject.name));
+                curInv.moneyText.text = gameManager.player.money.ToString();
             }
         }
     }
@@ -112,6 +114,7 @@ public class Inventory
 {
     public GameObject gameObject;
     public InventorySlot[] allSlots;
+    public Text moneyText;
 
     public Inventory(GameObject _gameObject)
     {
