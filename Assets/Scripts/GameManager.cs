@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public bool isPaused;
 
+    public delegate void Event();
+    public Event LateStart = delegate { };
+    float timer = 0;
+
     private void Awake()
     {
         itemManager = GetComponent<ItemManager>();
@@ -26,7 +30,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        
+        if (timer <= 0.25f && timer != -1) timer += Time.deltaTime;
+        if (timer >= 0.25f)
+        {
+            LateStart();
+            timer = -1;
+        }
     }
 
     public enum PauseStates { Paused, Unpaused, Change };
