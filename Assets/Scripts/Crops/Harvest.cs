@@ -5,9 +5,11 @@ using UnityEngine;
 public class Harvest : MonoBehaviour
 {
     GameManager gameManager;
+    Grow grow;
     void Start()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
+        Debug.Log("your amount of wheat " + gameManager.itemManager.CheckItemAmount("wheat"));
     }
 
 
@@ -19,23 +21,38 @@ public class Harvest : MonoBehaviour
     
     void Update()
     {
-        HarvestCrop();
+        if (grow != null)
+        {
+            HarvestCrop();
+        }
+        
     }
 
     public void HarvestCrop()
     {
-        /*
-        if (endsize == 1 && soilrange == true)
+     
+
+        if (grow.curSize >= grow.endSize && gameManager.createCrop.soilRange == true)
         {
-            press f to harvest
+            Debug.Log("harvest it ya cunt press R");
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                gameManager.itemManager.ChangeItemAmount("Wheat", Random.Range(1, 3));
+                Destroy(grow.gameObject);
+                Debug.Log("your amount of wheat " + gameManager.itemManager.CheckItemAmount("wheat"));
+            }
+            
+
         }
         
+    }
 
-        if (gameManager.grow.curSize >= gameManager.grow.endSize && gameManager.plant.soilRange == true)
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.GetComponent<Grow>())
         {
-            Debug.Log("harvest it ya cunt");
-
+            grow = other.GetComponent<Grow>();
         }
-        */
     }
 }
