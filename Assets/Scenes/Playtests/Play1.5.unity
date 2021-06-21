@@ -7580,7 +7580,6 @@ MonoBehaviour:
   UIManager: {fileID: 0}
   player: {fileID: 0}
   grow: {fileID: 0}
-  createCrop: {fileID: 0}
   isPaused: 0
 --- !u!114 &858670798
 MonoBehaviour:
@@ -8608,7 +8607,6 @@ GameObject:
   - component: {fileID: 1457265061}
   - component: {fileID: 1457265060}
   - component: {fileID: 1457265059}
-  - component: {fileID: 1457265058}
   - component: {fileID: 1457265057}
   - component: {fileID: 1457265056}
   - component: {fileID: 1457265055}
@@ -8646,7 +8644,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edba011373a64274b92b91da160d87f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barrelRange: 0
+  soilRange: 0
+  crop: {fileID: 1460603932105285351, guid: e5fcbd670177156418f5c7a8afd40c39, type: 3}
 --- !u!114 &1457265056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8674,20 +8673,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36e04dba982775d42b15e64b55ce14eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1457265058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1457265053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2088670ff163bce45afc54cb1607e860, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Crop: {fileID: 1460603932105285351, guid: e5fcbd670177156418f5c7a8afd40c39, type: 3}
-  soilRange: 0
 --- !u!114 &1457265059
 MonoBehaviour:
   m_ObjectHideFlags: 0
