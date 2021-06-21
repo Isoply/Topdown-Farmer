@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class Harvest : MonoBehaviour
 {
-    // Start is called before the first frame update
+   
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+
+    /*gebruik de endsize variable uit grow voor checken met harvest
+      gebruik de range voor check met harvest
+      knop voor harvesten
+    */
+
+    
     void Update()
     {
         
+    }
+
+    public void HarvestCrop()
+    {
+        /*
+        if (endsize == 1 && soilrange == true)
+        {
+            press f to harvest
+        }
+        */
     }
 }

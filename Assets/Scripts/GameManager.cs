@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public ItemManager itemManager;
     [HideInInspector] public UIManager UIManager;
     [HideInInspector] public Player player;
+    [HideInInspector] public Grow grow;
+    [HideInInspector] public Plant plant;
 
     [HideInInspector] public Crops crops = new Crops();
 
