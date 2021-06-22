@@ -15,16 +15,6 @@ public class Crops
         new Crop(new Item ("Pumpkin", 25), 8),
     };
 
-    
-
-    public void Awake()
-    {
-        foreach (var crop in allCrops)
-        {
-            crop.item.icon = Resources.Load<Sprite>($"icons/{crop.item.name}");
-        }
-    }
-
     public Crop FindCrop(string name)
     {
         foreach (var crop in allCrops)

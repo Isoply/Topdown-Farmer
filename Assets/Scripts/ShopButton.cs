@@ -19,6 +19,7 @@ public class ShopButton : MonoBehaviour
 
     private void Start()
     {
+        gameManager = GameObject.FindObjectOfType<GameManager>();
         gameManager.UpdateShop += UpdateButton;
         gameManager.LateStart += LateStart;
     }
@@ -30,21 +31,38 @@ public class ShopButton : MonoBehaviour
 
     public void ClickButton(int itemAmount)
     {
-        if (gameManager.player.money >= amount)
+        if (itemType == ItemTypes.Buy && gameManager.player.money >= amount)
         {
-            if (itemAmount < 0)
+            gameManager.player.money -= amount;
+            gameManager.itemManager.ChangeItemAmount(name, itemAmount);
+        }
+        else if (itemType == ItemTypes.Sell && gameManager.itemManager.CheckItemAmount(name) > 0)
+        {
+            gameManager.player.money -= amount;
+            gameManager.itemManager.ChangeItemAmount(name, itemAmount);
+        }
+        else if (itemType == ItemTypes.Craft)
+        {
+            if (CheckCraftAmount())
             {
-                if (gameManager.itemManager.CheckItemAmount(name) > 0)
-                {
-                    gameManager.player.money -= amount;
-                    gameManager.itemManager.ChangeItemAmount(name, itemAmount);
-                }
+                gameManager.itemManager.ChangeItemAmount(name, 1);
+                RemoveIngrediants();
             }
-            else
-            {
-                gameManager.player.money -= amount;
-                gameManager.itemManager.ChangeItemAmount(name, itemAmount);
-            }
+        }
+    }
+
+    bool CheckCraftAmount()
+    {
+        bool hasItems = true;
+        foreach (var ingrediant in gameManager.itemManager.GetItem(name).recipe.ToArray()) if (gameManager.itemManager.CheckItemAmount(ingrediant.item.name) < ingrediant.amount) hasItems = false;
+        return hasItems;
+    }
+
+    void RemoveIngrediants()
+    {
+        foreach (var ingrediant in gameManager.itemManager.GetItem(name).recipe.ToArray())
+        {
+            gameManager.itemManager.ChangeItemAmount(ingrediant.item.name, -ingrediant.amount);
         }
     }
 
@@ -54,8 +72,7 @@ public class ShopButton : MonoBehaviour
             else if (itemType == ItemTypes.Buy) GetComponent<Button>().interactable = false;
         if (itemType == ItemTypes.Sell) if (gameManager.itemManager.CheckItemAmount(name) >= 1) GetComponent<Button>().interactable = true;
             else if (itemType == ItemTypes.Sell) GetComponent<Button>().interactable = false;
-        //if (itemType == ItemTypes.Craft) if (gameManager.player.money >= amount) GetComponent<Button>().interactable = false;
-            //else if (itemType == ItemTypes.Craft) GetComponent<Button>().interactable = false;
-        print(itemType);
+        if (itemType == ItemTypes.Craft) if (CheckCraftAmount()) GetComponent<Button>().interactable = true;
+            else if (itemType == ItemTypes.Craft) GetComponent<Button>().interactable = false;
     }
 }
