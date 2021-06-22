@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool isPaused;
 
     public delegate void Event();
+    public Event UpdateShop = delegate { };
     public Event LateStart = delegate { };
     float timer = 0;
 
