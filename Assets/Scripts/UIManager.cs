@@ -76,6 +76,8 @@ public class UIManager : MonoBehaviour
                 newButton.gameManager = gameManager;
                 newButton.name = item.name;
                 newButton.amount = modifier * (int)(item.price + ((item.price / 100f) * modifier));
+                if (modifier >= 0) newButton.itemType = ShopButton.ItemTypes.Buy;
+                else if (modifier < 0) newButton.itemType = ShopButton.ItemTypes.Sell;
             }
 
             if (modifier >= 0) buyItems.Add(item);
@@ -114,6 +116,7 @@ public class UIManager : MonoBehaviour
                 if (curInv.moneyText != null) curInv.moneyText.text = $"{gameManager.player.money} $";
             }
         }
+        gameManager.UpdateShop();
     }
 
     void UpdateSlot(InventorySlot slot, Slot item)
