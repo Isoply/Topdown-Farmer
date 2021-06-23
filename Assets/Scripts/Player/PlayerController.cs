@@ -6,9 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     Player player;
 
-    public GameObject soilFeedback;
-    public GameObject barrelFeedback;
-    public GameObject harvestFeedback;
+    public Text playerFeedback;
+    
+    
 
     [HideInInspector] public Crop curCrop;
     Crop hoveredCrop;
@@ -45,8 +45,7 @@ public class PlayerController : MonoBehaviour
     {
         if (grow.curSize >= grow.endSize && soilRange)
         {
-            Debug.Log("je bent er");
-            harvestFeedback.SetActive(true);   
+           
             if (Input.GetKeyDown(KeyCode.R))
             {
                 player.gameManager.itemManager.ChangeItemAmount(grow.type.item.name, Random.Range(1, player.gameManager.crops.FindCrop(grow.type.item.name).maxRange));
@@ -88,7 +87,7 @@ public class PlayerController : MonoBehaviour
         {
             if (other.name.Substring(0, 6) == "Barrel")
             {
-                barrelFeedback.SetActive(true);
+                
                 hoveredCrop = CheckBarrelType(other.name.Substring(8, (other.name.Length - 8) - 1));
                 barrelRange = true;
             }
@@ -102,7 +101,7 @@ public class PlayerController : MonoBehaviour
             if (other.name.Substring(0, 6) == "Barrel")
             {
                 barrelRange = false;
-                barrelFeedback.SetActive(false);
+                
             }
         }
         if (other.name.Substring(0, 4) == "Soil")
