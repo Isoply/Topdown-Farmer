@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindObjectOfType<Player>();
-        
     }
 
     private void Update()
