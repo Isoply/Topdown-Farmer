@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     void TakeFromBarrel()
     {
         curCrop = hoveredCrop;
-        Debug.Log($"Picked up {curCrop.item.name}");
+        GameObject.Find("CurrentItem").GetComponent<Image>().sprite = curCrop.item.icon;
     }
 
     Crop CheckBarrelType(string type)

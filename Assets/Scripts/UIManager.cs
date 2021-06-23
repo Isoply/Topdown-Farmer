@@ -60,17 +60,24 @@ public class UIManager : MonoBehaviour
 
     public void ChangeRecipeDisplay(ShopButton thisButton)
     {
+        recipePreview.SetActive(!recipePreview.activeSelf);
+        UpdateRecipeDisplay(thisButton);
+    }
+
+    public void UpdateRecipeDisplay(ShopButton thisButton)
+    {
+
         int size = recipePreview.transform.childCount - 1;
         for (int i = 0; i < size; i++)
         {
             Destroy(recipePreview.transform.GetChild(size - i).gameObject);
         }
 
-        recipePreview.SetActive(!recipePreview.activeSelf);
         GameObject template = recipePreview.transform.GetChild(0).gameObject;
-        template.SetActive(true);
         Item curItem = gameManager.itemManager.GetItem(thisButton.name);
+
         size = 0;
+        template.SetActive(true);
         if (curItem.recipe.Count >= 1) size += UpdateCraftTemplate(Instantiate(template, recipePreview.transform), curItem.recipe[0]);
         if (curItem.recipe.Count >= 2) size += UpdateCraftTemplate(Instantiate(template, recipePreview.transform), curItem.recipe[1]);
         if (curItem.recipe.Count >= 3) size += UpdateCraftTemplate(Instantiate(template, recipePreview.transform), curItem.recipe[2]);
