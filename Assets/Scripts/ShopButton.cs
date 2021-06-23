@@ -54,7 +54,7 @@ public class ShopButton : MonoBehaviour
     bool CheckCraftAmount()
     {
         bool hasItems = true;
-        foreach (var ingrediant in gameManager.itemManager.GetItem(name).recipe.ToArray()) if (gameManager.itemManager.CheckItemAmount(ingrediant.item.name) < ingrediant.amount) hasItems = false;
+        foreach (var ingrediant in gameManager.itemManager.GetItem(name).recipe) if (gameManager.itemManager.CheckItemAmount(ingrediant.item.name) < ingrediant.amount) hasItems = false;
         return hasItems;
     }
 

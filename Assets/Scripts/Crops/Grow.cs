@@ -39,11 +39,11 @@ public class Grow : MonoBehaviour
         }
         if(curSize >= (endSize / 2))
         {
-            plant.GetComponent<SpriteRenderer>().color = new Color(255, 162, 0,255);
+            GetComponent<SpriteRenderer>().color = new Color(255, 162, 0,255);
         }
         if (curSize >= (endSize / 1.30))
         {
-            plant.GetComponent<SpriteRenderer>().color = new Color(255, 0, 255, 255);
+            GetComponent<SpriteRenderer>().color = new Color(255, 0, 255, 255);
         }
         if (curSize >= endSize)
         {

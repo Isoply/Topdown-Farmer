@@ -14,6 +14,9 @@ public class UIManager : MonoBehaviour
     [HideInInspector] public List<Item> craftItems = new List<Item>();
     [HideInInspector] public List<Inventory> invSlots = new List<Inventory>();
 
+    GameObject recipePreview;
+    int maxPreviewHeight;
+
     int priceDifferent = 5;
 
     private void Start()
@@ -22,6 +25,9 @@ public class UIManager : MonoBehaviour
         invSlots.Add(new Inventory(HUD.transform.Find("Shop").Find("Header").Find("Inventory").gameObject));
         invSlots.Add(new Inventory(HUD.transform.Find("Player").Find("Inventory").gameObject));
         invSlots.Add(new Inventory(HUD.transform.Find("Crafting").Find("Inventory").gameObject));
+        recipePreview = HUD.transform.Find("Crafting").Find("Recipe").gameObject;
+        maxPreviewHeight = (int)recipePreview.GetComponent<RectTransform>().sizeDelta.y;
+        recipePreview.SetActive(false);
 
         gameManager = GameObject.FindObjectOfType<GameManager>();
         SetShop(GameObject.Find("Buying").transform.GetChild(0).GetChild(0).gameObject, gameManager.itemManager.ToItems(gameManager.itemManager.allSlots.ToArray()), priceDifferent);
@@ -50,6 +56,41 @@ public class UIManager : MonoBehaviour
         animator.SetBool("isPlaying", isPlaying);
 
         if (animator.name == "Shop") gameManager.ChangePauseState(GameManager.PauseStates.Change);
+    }
+
+    public void ChangeRecipeDisplay(ShopButton thisButton)
+    {
+        int size = recipePreview.transform.childCount - 1;
+        for (int i = 0; i < size; i++)
+        {
+            Destroy(recipePreview.transform.GetChild(size - i).gameObject);
+        }
+
+        recipePreview.SetActive(!recipePreview.activeSelf);
+        GameObject template = recipePreview.transform.GetChild(0).gameObject;
+        template.SetActive(true);
+        Item curItem = gameManager.itemManager.GetItem(thisButton.name);
+        size = 0;
+        if (curItem.recipe.Count >= 1) size += UpdateCraftTemplate(Instantiate(template, recipePreview.transform), curItem.recipe[0]);
+        if (curItem.recipe.Count >= 2) size += UpdateCraftTemplate(Instantiate(template, recipePreview.transform), curItem.recipe[1]);
+        if (curItem.recipe.Count >= 3) size += UpdateCraftTemplate(Instantiate(template, recipePreview.transform), curItem.recipe[2]);
+        recipePreview.GetComponent<RectTransform>().sizeDelta = new Vector2(recipePreview.GetComponent<RectTransform>().sizeDelta.x, size);
+        template.SetActive(false);
+    }
+
+    int UpdateCraftTemplate(GameObject _template, Ingrediant ingrediant)
+    {
+        _template.GetComponentInChildren<Image>().sprite = ingrediant.item.icon;
+        if (gameManager.itemManager.CheckItemAmount(ingrediant.item.name) >= ingrediant.amount) _template.GetComponentInChildren<Image>().color = new Color32(255, 255, 255, 255);
+        else _template.GetComponentInChildren<Image>().color = new Color32(255, 150, 150, 255);
+        _template.GetComponentInChildren<Text>().text = $"{gameManager.itemManager.CheckItemAmount(ingrediant.item.name)}/{ingrediant.amount}";
+        return maxPreviewHeight / 3;
+    }
+
+    private void Update()
+    {
+        if (recipePreview.activeSelf && Input.mousePosition.x >= Screen.currentResolution.width / 2) recipePreview.transform.position = new Vector3(Input.mousePosition.x - recipePreview.GetComponent<RectTransform>().sizeDelta.x / 2, Input.mousePosition.y, Input.mousePosition.z);
+        else if (recipePreview.activeSelf) recipePreview.transform.position = new Vector3(Input.mousePosition.x + recipePreview.GetComponent<RectTransform>().sizeDelta.x / 2, Input.mousePosition.y, Input.mousePosition.z);
     }
 
     public void SetShop(GameObject parent, Item[] items, int modifier)
