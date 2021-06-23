@@ -9,7 +9,7 @@ public class Grow : MonoBehaviour
     public float growSpeed = 0.18f;
     public float endSize = 1;
     [HideInInspector] public float curSize = 0.1f;
-    float overwatered = 0.75f;
+    float overwatered = 0.60f;
 
     float timer;
     float lastTime;
@@ -39,6 +39,14 @@ public class Grow : MonoBehaviour
             curSize += growSpeed * Time.deltaTime;
             plant.transform.localScale = new Vector2(curSize, curSize);
             Debug.Log("Plant is still growing!");
+        }
+        if(curSize >= (endSize / 2))
+        {
+            plant.GetComponent<SpriteRenderer>().color = new Color(255, 162, 0,255);
+        }
+        if (curSize >= (endSize / 1.30))
+        {
+            plant.GetComponent<SpriteRenderer>().color = new Color(255, 0, 255, 255);
         }
         if (curSize >= endSize)
         {
