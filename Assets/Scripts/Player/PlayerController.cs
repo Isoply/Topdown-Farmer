@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Player player;
 
-    public Text playerFeedback;
+    Text playerFeedback;
     
     [HideInInspector] public Crop curCrop;
     Crop hoveredCrop;
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindObjectOfType<Player>();
+        playerFeedback = GameObject.Find("PlayerFeedback").GetComponent<Text>();
         playerFeedback.text = "";
     }
 

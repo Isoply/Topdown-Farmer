@@ -7,6 +7,7 @@ public class ItemManager : MonoBehaviour
     GameManager gameManager;
 
     public List<Slot> allSlots = new List<Slot>();
+    public List<Slot> allCrops = new List<Slot>();
     public List<Item> allRecipes = new List<Item>();
 
     private void Awake()
@@ -25,6 +26,19 @@ public class ItemManager : MonoBehaviour
         foreach (var recipe in allRecipes) allSlots.Add(new Slot(recipe.name, recipe));
         UpdateIcons();
         allSlots = SortToPrice();
+        allCrops = RemoveSlots(allSlots, allRecipes);
+    }
+
+    List<Slot> RemoveSlots(List<Slot> primary, List<Item> secondary)
+    {
+        List<Slot> newSlots = new List<Slot>();
+        foreach (var primSlot in primary)
+        {
+            bool exists = false;
+            foreach (var secSlot in secondary) if (primSlot.item.name == secSlot.name) exists = true;
+            if (!exists) newSlots.Add(primSlot);
+        }
+        return newSlots;
     }
 
     public Item[] ToItems(Slot[] slots)
