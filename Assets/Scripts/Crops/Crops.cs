@@ -8,7 +8,7 @@ public class Crops
     public Crop[] allCrops =
     {
         new Crop(new Item("Wheat", 3), 2),
-        new Crop(new Item ("Carrots", 9), 3),
+        new Crop(new Item ("Strawberrys", 9), 3),
         new Crop(new Item ("Corn", 12), 4),
         new Crop(new Item ("Potatoes", 16), 6),
         new Crop(new Item ("Cauliflower", 20), 7),
