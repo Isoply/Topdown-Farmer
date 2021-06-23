@@ -6620,7 +6620,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &503943634
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10442,7 +10442,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edba011373a64274b92b91da160d87f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerFeedback: {fileID: 0}
   crop: {fileID: 1460603932105285351, guid: e5fcbd670177156418f5c7a8afd40c39, type: 3}
 --- !u!114 &1457265056
 MonoBehaviour:
@@ -11391,7 +11390,7 @@ GameObject:
   - component: {fileID: 1818157908}
   - component: {fileID: 1818157907}
   m_Layer: 0
-  m_Name: Barrel (Carrots)
+  m_Name: Barrel (Strawberries)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
