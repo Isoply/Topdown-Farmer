@@ -9,18 +9,31 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public UIManager UIManager;
     [HideInInspector] public Player player;
     [HideInInspector] public Grow grow;
-    [HideInInspector] public Plant plant;
 
     [HideInInspector] public Crops crops = new Crops();
 
     [HideInInspector] public bool isPaused;
+
+    public delegate void Event();
+    public Event UpdateShop = delegate { };
+    public Event LateStart = delegate { };
+    float timer = 0;
 
     private void Awake()
     {
         itemManager = GetComponent<ItemManager>();
         UIManager = GetComponent<UIManager>();
         player = GameObject.FindObjectOfType<Player>();
-        crops.Awake();
+    }
+
+    private void Update()
+    {
+        if (timer <= 0.005f && timer != -1) timer += Time.deltaTime;
+        if (timer >= 0.005f)
+        {
+            LateStart();
+            timer = -1;
+        }
     }
 
     public enum PauseStates { Paused, Unpaused, Change };

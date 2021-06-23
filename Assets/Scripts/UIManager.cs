@@ -9,18 +9,36 @@ public class UIManager : MonoBehaviour
 
     bool isPlaying;
     Animator animator;
-    List<Item> buyItems = new List<Item>();
-    List<Item> sellItems = new List<Item>();
-    List<GameObject> invSlots = new List<GameObject>();
+    [HideInInspector] public List<Item> buyItems = new List<Item>();
+    [HideInInspector] public List<Item> sellItems = new List<Item>();
+    [HideInInspector] public List<Item> craftItems = new List<Item>();
+    [HideInInspector] public List<Inventory> invSlots = new List<Inventory>();
+
+    int priceDifferent = 5;
 
     private void Start()
     {
         GameObject HUD = GameObject.Find("HUD");
-        gameManager = GameObject.FindObjectOfType<GameManager>();
-        SetShop(GameObject.Find("Buying"), gameManager.crops.allCrops, 5);
-        SetShop(GameObject.Find("Selling"), gameManager.crops.allCrops, -5);
+        invSlots.Add(new Inventory(HUD.transform.Find("Shop").Find("Header").Find("Inventory").gameObject));
+        invSlots.Add(new Inventory(HUD.transform.Find("Player").Find("Inventory").gameObject));
+        invSlots.Add(new Inventory(HUD.transform.Find("Crafting").Find("Inventory").gameObject));
 
-        invSlots.Add(HUD.transform.Find("Shop").Find("Header").Find("Inventory").gameObject);
+        gameManager = GameObject.FindObjectOfType<GameManager>();
+        SetShop(GameObject.Find("Buying").transform.GetChild(0).GetChild(0).gameObject, gameManager.itemManager.ToItems(gameManager.itemManager.allSlots.ToArray()), priceDifferent);
+        SetShop(GameObject.Find("Selling").transform.GetChild(0).GetChild(0).gameObject, gameManager.itemManager.ToItems(gameManager.itemManager.allSlots.ToArray()), -priceDifferent);
+        SetShop(GameObject.Find("Crafting").transform.Find("Items").gameObject, gameManager.itemManager.allRecipes.ToArray(), 0);
+
+        gameManager.LateStart += LateStart;
+    }
+
+    private void LateStart()
+    {
+        invSlots[0].moneyText = invSlots[0].gameObject.transform.parent.Find("Money").GetComponentInChildren<Text>();
+        invSlots[0].allSlots = CreateInventory(invSlots[0].gameObject, gameManager.itemManager.allSlots.ToArray());
+        invSlots[1].allSlots = CreateInventory(invSlots[1].gameObject, gameManager.itemManager.allSlots.ToArray());
+        invSlots[2].allSlots = CreateInventory(invSlots[2].gameObject, gameManager.itemManager.allSlots.ToArray());
+        UpdateInventory();
+        gameManager.crops.ToItems();
     }
 
     public void StartAnimationBool(Animator newAnimator)
@@ -36,24 +54,30 @@ public class UIManager : MonoBehaviour
 
     public void SetShop(GameObject parent, Item[] items, int modifier)
     {
-        GameObject prefab = parent.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
-        Transform newParent = parent.transform.GetChild(0).GetChild(0);
+        GameObject prefab = parent.transform.GetChild(0).gameObject;
 
         int size = 0;
 
+
         Item[] usedArray = null;
         bool skips;
-        if (modifier >= 0) usedArray = buyItems.ToArray();
+        if (modifier > 0) usedArray = buyItems.ToArray();
         else if (modifier < 0) usedArray = sellItems.ToArray();
+        else if (modifier == 0) usedArray = craftItems.ToArray();
         foreach (var item in items)
         {
             skips = false;
             foreach (var curItem in usedArray) if (curItem.name == item.name) skips = true;
             if (skips) continue;
-            GameObject newShopItem = Instantiate(prefab, newParent);
+            GameObject newShopItem = Instantiate(prefab, parent.transform);
             newShopItem.transform.GetChild(0).GetComponent<Image>().sprite = item.icon;
-            newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(0).GetComponent<Text>().text = item.name;
-            newShopItem.GetComponentInChildren<HorizontalLayoutGroup>().transform.GetChild(1).GetComponent<Text>().text = ((int)(item.price + ((item.price / 100f) * modifier))).ToString();
+            if (newShopItem.transform.childCount > 1)
+            {
+                newShopItem.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = item.name;
+                newShopItem.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = ((int)(item.price + ((item.price / 100f) * modifier))).ToString() + "$";
+                if (modifier >= 0) newShopItem.transform.GetChild(1).GetChild(1).GetComponent<Text>().color = Color.red;
+                else if (modifier < 0) newShopItem.transform.GetChild(1).GetChild(1).GetComponent<Text>().color = Color.green;
+            }
             newShopItem.SetActive(true);
 
             ShopButton newButton = newShopItem.GetComponent<ShopButton>();
@@ -61,51 +85,97 @@ public class UIManager : MonoBehaviour
             {
                 newButton.gameManager = gameManager;
                 newButton.name = item.name;
-                newButton.amount = (int)(item.price + ((item.price / 100f) * modifier));
+                newButton.amount = modifier * (int)(item.price + ((item.price / 100f) * modifier));
+                if (modifier > 0) newButton.itemType = ShopButton.ItemTypes.Buy;
+                else if (modifier < 0) newButton.itemType = ShopButton.ItemTypes.Sell;
+                else if (modifier == 0) newButton.itemType = ShopButton.ItemTypes.Craft;
             }
 
-            if (modifier >= 0) buyItems.Add(item);
+            if (modifier > 0) buyItems.Add(item);
             else if (modifier < 0) sellItems.Add(item);
-            size += 120;
+            else if (modifier == 0) craftItems.Add(item);
+            size += 165;
         }
-
-        newParent.GetComponent<RectTransform>().sizeDelta = new Vector2(size, newParent.GetComponent<RectTransform>().sizeDelta.y);
+        if (parent.GetComponent<HorizontalLayoutGroup>()) parent.GetComponent<RectTransform>().sizeDelta = new Vector2(size, parent.GetComponent<RectTransform>().sizeDelta.y);
     }
 
-    public void CreateInventory(GameObject parent)
+    public InventorySlot[] CreateInventory(GameObject parent, Slot[] items)
     {
-        
+        GameObject prefab = parent.transform.GetChild(0).gameObject;
+        List<InventorySlot> slots = new List<InventorySlot>();
+        foreach (var item in items)
+        {
+            InventorySlot newSlot = new InventorySlot(Instantiate(prefab, parent.transform));
+            newSlot.gameObject.SetActive(true);
+            newSlot.GetVariables();
+            UpdateSlot(newSlot, item);
+            newSlot.text.text = item.amount.ToString();
+            newSlot.icon.sprite = gameManager.itemManager.GetItem(item.name).icon;
+            newSlot.gameObject.name = item.name;
+            slots.Add(newSlot);
+        }
+        return slots.ToArray();
     }
 
     public void UpdateInventory()
     {
+        foreach (var curInv in invSlots)
+        {
+            foreach (var curSlot in curInv.allSlots)
+            {
+                UpdateSlot(curSlot, gameManager.itemManager.FindSlot(curSlot.gameObject.name));
+                if (curInv.moneyText != null) curInv.moneyText.text = $"{gameManager.player.money} $";
+            }
+        }
+        gameManager.UpdateShop();
+    }
 
+    void UpdateSlot(InventorySlot slot, Slot item)
+    {
+        slot.text.text = item.amount.ToString();
+        slot.icon.sprite = gameManager.itemManager.GetItem(item.name).icon;
+        slot.gameObject.name = item.name;
     }
 }
 
-class Inventory
+public class Inventory
+{
+    public GameObject gameObject;
+    public InventorySlot[] allSlots;
+    public Text moneyText;
+
+    public Inventory(GameObject _gameObject)
+    {
+        gameObject = _gameObject;
+    }
+}
+
+public class InventorySlot
 {
     public GameObject parent;
+    public GameObject gameObject;
     public Text text;
     public Image icon;
 
-    public Inventory(GameObject _parent)
+    public InventorySlot(GameObject _gameObject)
     {
-        parent = _parent;
+        gameObject = _gameObject;
     }
 
-    public Inventory(GameObject _parent, Text _text, Image _icon)
+    public InventorySlot(GameObject _gameObject, Text _text, Image _icon)
     {
-        parent = _parent;
+        gameObject = _gameObject;
         text = _text;
         icon = _icon;
     }
 
     public bool GetVariables()
     {
-        if (parent != null)
+        if (gameObject != null)
         {
-
+            text = gameObject.transform.GetComponentInChildren<Text>();
+            if (gameObject.transform.GetComponentsInChildren<Image>().Length > 0) icon = gameObject.transform.GetComponentsInChildren<Image>()[1];
+            else icon = gameObject.transform.GetComponentInChildren<Image>();
             return true;
         }
         else return false;
