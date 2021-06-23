@@ -20,7 +20,7 @@ public class ItemManager : MonoBehaviour
 
         //All recipes
         allRecipes.Add(new Item("Bread", 15, new Ingrediant(GetItem("Wheat"), 3)));
-        allRecipes.Add(new Item("Cake", 50, new Ingrediant(GetItem("Wheat"), 2), new Ingrediant(GetItem("Carrots"), 2)));
+        allRecipes.Add(new Item("Carrot Cake", 50, new Ingrediant(GetItem("Wheat"), 2), new Ingrediant(GetItem("Carrots"), 2)));
 
         foreach (var recipe in allRecipes) allSlots.Add(new Slot(recipe.name, recipe));
         UpdateIcons();
@@ -47,7 +47,7 @@ public class ItemManager : MonoBehaviour
             {
                 if (slot.item.price == allPrices[i])
                 {
-                    newSlots.RemoveAt(i);
+                    newSlots.Remove(slot);
                     newSlots.Insert(i, slot);
                 }
             }
