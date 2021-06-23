@@ -38,6 +38,15 @@ public class PlayerController : MonoBehaviour
         {
             playerFeedback.transform.position = Camera.main.WorldToScreenPoint(new Vector3(player.transform.position.x, player.transform.position.y + 0.5f, player.transform.position.z));
         }
+        if (grow != null) UpdateCropText();
+    }
+
+    void UpdateCropText()
+    {
+        if (grow != null && grow.curSize >= grow.endSize) playerFeedback.text = GetFeedback("Crop").text;
+        else if (grow != null && !grow.isGrowing) playerFeedback.text = GetFeedback("Crop").text;
+        else if (grow != null && grow.isGrowing) playerFeedback.text = "";
+        
     }
 
     public void PlantCrop()
@@ -52,13 +61,14 @@ public class PlayerController : MonoBehaviour
 
     public void HarvestCrop()
     {
-        if (grow.curSize >= grow.endSize && crop != null)
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (grow.curSize >= grow.endSize && crop != null)
             {
                 player.gameManager.itemManager.ChangeItemAmount(grow.type.item.name, Random.Range(1, player.gameManager.crops.FindCrop(grow.type.item.name).maxRange));
                 Destroy(grow.gameObject);
             }
+            else if (crop != null && !grow.isGrowing) Destroy(grow.gameObject);
         }
     }
 
@@ -84,15 +94,16 @@ public class PlayerController : MonoBehaviour
     {
         if (other.GetComponent<Grow>()) grow = other.GetComponent<Grow>();
 
-
-        if (grow != null && grow.curSize >= grow.endSize) playerFeedback.text = GetFeedback("Crop").text;
         if (other.name.Length >= 4)
         {
             if (other.name.Substring(0, 4) == "Soil")
             {
-                if (curCrop != null) playerFeedback.text = GetFeedback("Soil").text;
-                soil = other.gameObject;
-                GetFeedback("Soil").range = true;
+                if (other.transform.childCount <= 0)
+                {
+                    if (curCrop != null) playerFeedback.text = GetFeedback("Soil").text;
+                    soil = other.gameObject;
+                    GetFeedback("Soil").range = true;
+                }
             }
         }
         if (other.name.Length >= 6)
