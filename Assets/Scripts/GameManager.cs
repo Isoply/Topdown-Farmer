@@ -22,9 +22,8 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         itemManager = GetComponent<ItemManager>();
-        UIManager = GetComponent<UIManager>();
+        UIManager = GameObject.FindObjectOfType<UIManager>();
         player = GameObject.FindObjectOfType<Player>();
-        crops.Awake();
     }
 
     private void Update()

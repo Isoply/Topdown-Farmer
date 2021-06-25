@@ -8,22 +8,12 @@ public class Crops
     public Crop[] allCrops =
     {
         new Crop(new Item("Wheat", 3), 2),
-        new Crop(new Item ("Carrots", 9), 3),
+        new Crop(new Item ("Strawberries", 9), 3),
         new Crop(new Item ("Corn", 12), 4),
         new Crop(new Item ("Potatoes", 16), 6),
         new Crop(new Item ("Cauliflower", 20), 7),
         new Crop(new Item ("Pumpkin", 25), 8),
     };
-
-    
-
-    public void Awake()
-    {
-        foreach (var crop in allCrops)
-        {
-            crop.item.icon = Resources.Load<Sprite>($"icons/{crop.item.name}");
-        }
-    }
 
     public Crop FindCrop(string name)
     {
