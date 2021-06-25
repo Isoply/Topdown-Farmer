@@ -211,7 +211,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Play1
+          m_StringArgument: Play 2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &283256069
@@ -748,7 +748,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09168b09a8e01814f96a7a44cd5d4dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crops: {fileID: 0}
+  itemManager: {fileID: 0}
+  UIManager: {fileID: 0}
+  player: {fileID: 0}
+  grow: {fileID: 0}
   isPaused: 0
 --- !u!4 &1186351152
 Transform:
