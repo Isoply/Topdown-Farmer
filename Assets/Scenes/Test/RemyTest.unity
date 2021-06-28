@@ -2351,6 +2351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09168b09a8e01814f96a7a44cd5d4dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cycle: {fileID: 0}
   itemManager: {fileID: 0}
   UIManager: {fileID: 0}
   player: {fileID: 0}
@@ -3403,8 +3404,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edba011373a64274b92b91da160d87f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soilFeedback: {fileID: 1906688084}
-  soilRange: 0
   crop: {fileID: 1460603932105285351, guid: e5fcbd670177156418f5c7a8afd40c39, type: 3}
 --- !u!1 &1079961269
 GameObject:
@@ -10867,7 +10866,7 @@ SpriteRenderer:
   m_Size: {x: 6, y: 8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1906688086
