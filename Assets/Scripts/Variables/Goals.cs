@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Goals
 {
-    List<Day> allGoals = new List<Day>
+    public List<Day> allGoals = new List<Day>
     {
-        new Day(0, 100),
+        new Day(1, 100),
     };
 }
 

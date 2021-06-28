@@ -5,12 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [HideInInspector] public DayNightCycle cycle;
     [HideInInspector] public ItemManager itemManager;
     [HideInInspector] public UIManager UIManager;
     [HideInInspector] public Player player;
     [HideInInspector] public Grow grow;
 
     [HideInInspector] public Crops crops = new Crops();
+    [HideInInspector] public Goals goals = new Goals();
 
     [HideInInspector] public bool isPaused;
 
@@ -21,9 +23,22 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        cycle = GameObject.FindObjectOfType<DayNightCycle>();
         itemManager = GetComponent<ItemManager>();
         UIManager = GameObject.FindObjectOfType<UIManager>();
         player = GameObject.FindObjectOfType<Player>();
+    }
+
+    public void CheckWinCondition(int currentDay)
+    {
+        foreach (var goal in goals.allGoals)
+        {
+            if (goal.number == currentDay)
+            {
+                if (goal.money >= player.money) print("lose");
+                return;
+            }
+        }
     }
 
     private void Update()

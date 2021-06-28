@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class DayNightCycle : MonoBehaviour
 {
+    GameManager gameManager;
+
     Text display;
     Image overlay;
 
@@ -20,6 +22,7 @@ public class DayNightCycle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.FindObjectOfType<GameManager>();
         display = GameObject.Find("Time").GetComponentInChildren<Text>();
         overlay = GameObject.Find("Overlay").GetComponent<Image>();
         if (time >= 5 && time <= 50) overlay.color = new Color32(255, 100, 0, (byte)opacity);
@@ -43,6 +46,7 @@ public class DayNightCycle : MonoBehaviour
         {
             time = 0;
             day++;
+            gameManager.CheckWinCondition(day);
         }
         return $"{time.ToString("00")} | Day {day}";
     }
