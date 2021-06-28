@@ -29,6 +29,41 @@ public class ItemManager : MonoBehaviour
         allCrops = RemoveSlots(allSlots, allRecipes);
     }
 
+    void Update()
+    {
+        foreach (var crop in gameManager.crops.allCrops)
+        {
+            UpdateCropDecayTimer(crop);
+        }
+    }
+
+    void UpdateCropDecayTimer(Crop crop)
+    {
+        if (CheckItemAmount(crop.item.name) > 0 && !gameManager.isPaused)
+        {
+            crop.timer += Time.deltaTime;
+            if (crop.timer >= crop.decayTime)
+            {
+                ChangeItemAmount(crop.item.name, -1);
+                crop.timer = 0;
+            }
+
+            foreach (var inventory in gameManager.UIManager.invSlots[1].allSlots)
+            {
+                if (inventory.name == crop.item.name) inventory.timer.text = (crop.decayTime - crop.timer).ToString("0.00");
+            }
+        }
+    }
+
+    Slot GetSlot(string _name)
+    {
+        foreach (var slot in allSlots)
+        {
+            if (slot.name == _name) return slot;
+        }
+        return null;
+    }
+
     List<Slot> RemoveSlots(List<Slot> primary, List<Item> secondary)
     {
         List<Slot> newSlots = new List<Slot>();

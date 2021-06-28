@@ -48,6 +48,15 @@ public class UIManager : MonoBehaviour
         invSlots[2].allSlots = CreateInventory(invSlots[2].gameObject, gameManager.itemManager.allSlots.ToArray());
         UpdateInventory();
         gameManager.crops.ToItems();
+
+        foreach (var crop in gameManager.crops.allCrops)
+        {
+            foreach (var inventory in gameManager.UIManager.invSlots[1].allSlots)
+            {
+                if (inventory.name == crop.item.name) inventory.timer.text = (crop.decayTime - crop.timer).ToString("0.00");
+            }
+        }
+
     }
 
     public void StartAnimationBool(Animator newAnimator)
@@ -194,6 +203,7 @@ public class UIManager : MonoBehaviour
         foreach (var item in items)
         {
             InventorySlot newSlot = new InventorySlot(Instantiate(prefab, parent.transform));
+            newSlot.gameObject.name = item.item.name;
             newSlot.gameObject.SetActive(true);
             newSlot.GetVariables();
             UpdateSlot(newSlot, item);
@@ -240,10 +250,12 @@ public class Inventory
 
 public class InventorySlot
 {
+    public string name;
     public GameObject parent;
     public GameObject gameObject;
     public Text text;
     public Image icon;
+    public Text timer;
 
     public InventorySlot(GameObject _gameObject)
     {
@@ -261,7 +273,9 @@ public class InventorySlot
     {
         if (gameObject != null)
         {
-            text = gameObject.transform.GetComponentInChildren<Text>();
+            name = gameObject.name;
+            text = gameObject.transform.Find("Text").GetComponent<Text>();
+            if (gameObject.transform.Find("Timer")) timer = gameObject.transform.Find("Timer").GetComponent<Text>();
             if (gameObject.transform.GetComponentsInChildren<Image>().Length > 0) icon = gameObject.transform.GetComponentsInChildren<Image>()[1];
             else icon = gameObject.transform.GetComponentInChildren<Image>();
             return true;

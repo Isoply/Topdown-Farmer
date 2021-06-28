@@ -7,12 +7,12 @@ public class Crops
     //array
     public Crop[] allCrops =
     {
-        new Crop(new Item("Wheat", 3), 2),
-        new Crop(new Item ("Strawberries", 9), 3),
-        new Crop(new Item ("Corn", 12), 4),
-        new Crop(new Item ("Potatoes", 16), 6),
-        new Crop(new Item ("Cauliflower", 20), 7),
-        new Crop(new Item ("Pumpkin", 25), 8),
+        new Crop(new Item("Wheat", 3), 5, 2),
+        new Crop(new Item ("Strawberries", 9), 4, 3),
+        new Crop(new Item ("Corn", 12), 3, 4),
+        new Crop(new Item ("Potatoes", 16), 2, 6),
+        new Crop(new Item ("Cauliflower", 20), 1, 7),
+        new Crop(new Item ("Pumpkin", 25), 0.5f, 8),
     };
 
     public Crop FindCrop(string name)
@@ -39,10 +39,13 @@ public class Crop
 {
     public Item item;
     public int maxRange;
+    public float decayTime = 1;
+    public float timer;
 
-    public Crop(Item _item, int _maxRange = 1)
+    public Crop(Item _item, float _decayTime = 1, int _maxRange = 1)
     {
         item = _item;
+        decayTime = _decayTime;
         maxRange = _maxRange;
     }
 }
