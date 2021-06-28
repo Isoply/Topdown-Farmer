@@ -223,6 +223,7 @@ public class UIManager : MonoBehaviour
             {
                 UpdateSlot(curSlot, gameManager.itemManager.FindSlot(curSlot.gameObject.name));
                 if (curInv.moneyText != null) curInv.moneyText.text = $"{gameManager.player.money} $";
+                if (GameObject.Find("Money")) GameObject.Find("Money").GetComponentInChildren<Text>().text = $"{gameManager.player.money}$";
             }
         }
         gameManager.UpdateShop();

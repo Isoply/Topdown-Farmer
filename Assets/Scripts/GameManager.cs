@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -14,6 +15,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Crops crops = new Crops();
     [HideInInspector] public Goals goals = new Goals();
 
+    Text goalText;
+
     [HideInInspector] public bool isPaused;
 
     public delegate void Event();
@@ -23,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        goalText = GameObject.Find("Goal").GetComponentInChildren<Text>();
+        goalText.text = FindNextGoal(0);
         cycle = GameObject.FindObjectOfType<DayNightCycle>();
         itemManager = GetComponent<ItemManager>();
         UIManager = GameObject.FindObjectOfType<UIManager>();
@@ -36,9 +41,19 @@ public class GameManager : MonoBehaviour
             if (goal.number == currentDay)
             {
                 if (goal.money >= player.money) print("lose");
+                goalText.text = FindNextGoal(currentDay);
                 return;
             }
         }
+    }
+
+    string FindNextGoal(int currentDay)
+    {
+        foreach (var goal in goals.allGoals)
+        {
+            if (goal.number > currentDay) return $"Goal: Day {goal.number} - {goal.money}$";
+        }
+        return null;
     }
 
     private void Update()

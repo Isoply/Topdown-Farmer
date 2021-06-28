@@ -6,7 +6,9 @@ public class Goals
 {
     public List<Day> allGoals = new List<Day>
     {
-        new Day(1, 100),
+        new Day(1, 10000),
+        new Day(5, 200),
+        new Day(10, 500),
     };
 }
 
