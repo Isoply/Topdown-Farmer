@@ -22,7 +22,9 @@ public class ItemManager : MonoBehaviour
         //All recipes
         allRecipes.Add(new Item("Bread", 15, new Ingrediant(GetItem("Wheat"), 3)));
         allRecipes.Add(new Item("Strawberry Cake", 50, new Ingrediant(GetItem("Wheat"), 2), new Ingrediant(GetItem("Strawberries"), 2)));
-
+        allRecipes.Add(new Item("Row2", 800000, new Ingrediant(GetItem("Wheat"), 1)));
+        allRecipes.Add(new Item("Row3", 800000, new Ingrediant(GetItem("Wheat"), 2)));
+        
         foreach (var recipe in allRecipes) allSlots.Add(new Slot(recipe.name, recipe));
         UpdateIcons();
         allSlots = SortToPrice();

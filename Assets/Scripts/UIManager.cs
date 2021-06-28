@@ -167,6 +167,7 @@ public class UIManager : MonoBehaviour
             foreach (var curItem in usedArray) if (curItem.name == item.name) skips = true;
             if (skips) continue;
             GameObject newShopItem = Instantiate(prefab, parent.transform);
+            newShopItem.gameObject.name = item.name;
             newShopItem.transform.GetChild(0).GetComponent<Image>().sprite = item.icon;
             if (newShopItem.transform.childCount > 1)
             {
