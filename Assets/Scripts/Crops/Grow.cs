@@ -29,9 +29,14 @@ public class Grow : MonoBehaviour
         if (timer >= overwatered)
         {
             isGrowing = false;
+            GetComponent<ParticleSystem>().startLifetime = 0;
             GetComponent<SpriteRenderer>().color = new Color(125, 0, 0, 255);
         }
-        else if (timer > 0.15f) isGrowing = true;
+        else if (timer > 0.15f)
+        {
+            GetComponent<ParticleSystem>().startLifetime = 2;
+            isGrowing = true;
+        }
 
         if (lastTime == timer) timer = 0;
 
@@ -41,7 +46,12 @@ public class Grow : MonoBehaviour
         if (curSize <= endSize && isGrowing == true)
         {
             curSize += growSpeed * Time.deltaTime;
-            if (curSize >= endSize) isGrowing = false;
+            if (curSize >= endSize)
+            {
+                GetComponent<ParticleSystem>().startColor = new Color32(0, 255, 0, 255);
+                isGrowing = false;
+            }
+
             //transform.localScale = new Vector2(curSize, curSize);
         }
         UpdateSprite();
