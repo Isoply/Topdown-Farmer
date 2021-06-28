@@ -435,7 +435,7 @@ ParticleSystem:
   m_GameObject: {fileID: 22139361}
   serializedVersion: 6
   lengthInSec: 5
-  simulationSpeed: 1
+  simulationSpeed: 2
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
@@ -509,7 +509,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.75
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -562,7 +562,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.25
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -678,7 +678,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.03
+      scalar: 0.05
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1000,7 +1000,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -8455,7 +8455,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 858670800}
-  - component: {fileID: 858670799}
   - component: {fileID: 858670798}
   - component: {fileID: 858670797}
   - component: {fileID: 858670795}
@@ -8508,20 +8507,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47ce86814dc43f840b1e2cc888494ed0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &858670799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 858670794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a43c6d3814fd2c4b94c25cbfd13a37d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGrowing: 0
-  waterParticle: {fileID: 22139361}
 --- !u!4 &858670800
 Transform:
   m_ObjectHideFlags: 0
@@ -10805,6 +10790,7 @@ GameObject:
   - component: {fileID: 1457265059}
   - component: {fileID: 1457265056}
   - component: {fileID: 1457265055}
+  - component: {fileID: 1457265057}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -10855,6 +10841,19 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   playerControl: {fileID: 0}
   money: 0
+--- !u!114 &1457265057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457265053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a43c6d3814fd2c4b94c25cbfd13a37d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrowing: 0
 --- !u!114 &1457265059
 MonoBehaviour:
   m_ObjectHideFlags: 0

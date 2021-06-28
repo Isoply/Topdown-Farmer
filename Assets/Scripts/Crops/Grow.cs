@@ -29,12 +29,12 @@ public class Grow : MonoBehaviour
         if (timer >= overwatered)
         {
             isGrowing = false;
-            GetComponent<ParticleSystem>().startLifetime = 0;
+            GetComponent<ParticleSystem>().maxParticles = 0;
             GetComponent<SpriteRenderer>().color = new Color(125, 0, 0, 255);
         }
         else if (timer > 0.15f)
         {
-            GetComponent<ParticleSystem>().startLifetime = 2;
+            GetComponent<ParticleSystem>().maxParticles = 1000;
             isGrowing = true;
         }
 
