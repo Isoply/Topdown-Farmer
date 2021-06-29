@@ -6,6 +6,7 @@ public class WaterScript : MonoBehaviour
 {
     ParticleSystem waterParticle;
     [HideInInspector] public bool isGrowing;
+    [HideInInspector] public bool isWatering = false;
 
     int particleAmount;
 
@@ -24,10 +25,12 @@ public class WaterScript : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0))
         {
             waterParticle.maxParticles = particleAmount;
+            isWatering = true;
         }
         else
         {
             waterParticle.maxParticles = 0;
+            isWatering = false;
         }
 
     }
