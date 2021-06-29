@@ -57,6 +57,15 @@ public class ItemManager : MonoBehaviour
         }
     }
 
+    public void ResetCropDecayTimer(Crop crop)
+    {
+        crop.timer = 0;
+        foreach (var inventory in gameManager.UIManager.invSlots[1].allSlots)
+        {
+            if (inventory.name == crop.item.name) inventory.timer.text = (crop.decayTime - crop.timer).ToString("0.00");
+        }
+    }
+
     Slot GetSlot(string _name)
     {
         foreach (var slot in allSlots)

@@ -40,6 +40,7 @@ public class ShopButton : MonoBehaviour
         {
             gameManager.player.money -= amount;
             gameManager.itemManager.ChangeItemAmount(name, itemAmount);
+            if(gameManager.crops.FindCrop(name) != null) gameManager.itemManager.ResetCropDecayTimer(gameManager.crops.FindCrop(name));
         }
         else if (itemType == ItemTypes.Craft)
         {
