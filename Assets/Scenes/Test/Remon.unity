@@ -10855,6 +10855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGrowing: 0
+  isWatering: 0
 --- !u!114 &1457265059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10873,6 +10874,10 @@ MonoBehaviour:
   - {fileID: -4245738604243887485, guid: 04dc3fabfa2599549b508031ff1ca204, type: 3}
   - {fileID: 7364682651488144517, guid: 04dc3fabfa2599549b508031ff1ca204, type: 3}
   - {fileID: 802321206317977270, guid: 04dc3fabfa2599549b508031ff1ca204, type: 3}
+  - {fileID: -2521826894279438384, guid: 04dc3fabfa2599549b508031ff1ca204, type: 3}
+  - {fileID: 7365574002475698461, guid: 04dc3fabfa2599549b508031ff1ca204, type: 3}
+  - {fileID: -4529042392078601758, guid: 04dc3fabfa2599549b508031ff1ca204, type: 3}
+  - {fileID: -482043112589295754, guid: 04dc3fabfa2599549b508031ff1ca204, type: 3}
 --- !u!61 &1457265060
 BoxCollider2D:
   m_ObjectHideFlags: 0
