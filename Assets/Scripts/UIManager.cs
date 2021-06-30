@@ -166,36 +166,40 @@ public class UIManager : MonoBehaviour
         else if (modifier == 0) usedArray = craftItems.ToArray();
         foreach (var item in items)
         {
-            skips = false;
-            foreach (var curItem in usedArray) if (curItem.name == item.name) skips = true;
-            if (skips) continue;
-            GameObject newShopItem = Instantiate(prefab, parent.transform);
-            newShopItem.gameObject.name = item.name;
-            newShopItem.transform.GetChild(0).GetComponent<Image>().sprite = item.icon;
-            if (newShopItem.transform.childCount > 1)
+            if ((item.name != "Row2" && item.name != "Row3") || parent.name == "Items")
             {
-                newShopItem.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = item.name;
-                newShopItem.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = (modifier * (int)(item.price + ((item.price / 100f) * modifier))).ToString().Trim('-') + "$";
-                if (modifier >= 0) newShopItem.transform.GetChild(1).GetChild(1).GetComponent<Text>().color = Color.red;
-                else if (modifier < 0) newShopItem.transform.GetChild(1).GetChild(1).GetComponent<Text>().color = Color.green;
-            }
-            newShopItem.SetActive(true);
+                skips = false;
+                foreach (var curItem in usedArray) if (curItem.name == item.name) skips = true;
+                if (skips) continue;
+                GameObject newShopItem = Instantiate(prefab, parent.transform);
+                newShopItem.gameObject.name = item.name;
+                newShopItem.transform.GetChild(0).GetComponent<Image>().sprite = item.icon;
+                if (newShopItem.transform.childCount > 1)
+                {
+                    newShopItem.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = item.name;
+                    newShopItem.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = (modifier * (int)(item.price + ((item.price / 100f) * modifier))).ToString().Trim('-') + "$";
+                    if (modifier >= 0) newShopItem.transform.GetChild(1).GetChild(1).GetComponent<Text>().color = Color.red;
+                    else if (modifier < 0) newShopItem.transform.GetChild(1).GetChild(1).GetComponent<Text>().color = Color.green;
+                }
+                newShopItem.SetActive(true);
 
-            ShopButton newButton = newShopItem.GetComponent<ShopButton>();
-            if (newButton != null)
-            {
-                newButton.gameManager = gameManager;
-                newButton.name = item.name;
-                newButton.amount = modifier * (int)(item.price + ((item.price / 100f) * modifier));
-                if (modifier > 0) newButton.itemType = ShopButton.ItemTypes.Buy;
-                else if (modifier < 0) newButton.itemType = ShopButton.ItemTypes.Sell;
-                else if (modifier == 0) newButton.itemType = ShopButton.ItemTypes.Craft;
-            }
+                ShopButton newButton = newShopItem.GetComponent<ShopButton>();
+                if (newButton != null)
+                {
+                    if (item.name == "Row2" || item.name == "Row3") newButton.deactivateOnClick = true;
+                    newButton.gameManager = gameManager;
+                    newButton.name = item.name;
+                    newButton.amount = modifier * (int)(item.price + ((item.price / 100f) * modifier));
+                    if (modifier > 0) newButton.itemType = ShopButton.ItemTypes.Buy;
+                    else if (modifier < 0) newButton.itemType = ShopButton.ItemTypes.Sell;
+                    else if (modifier == 0) newButton.itemType = ShopButton.ItemTypes.Craft;
+                }
 
-            if (modifier > 0) buyItems.Add(item);
-            else if (modifier < 0) sellItems.Add(item);
-            else if (modifier == 0) craftItems.Add(item);
-            size += 210;
+                if (modifier > 0) buyItems.Add(item);
+                else if (modifier < 0) sellItems.Add(item);
+                else if (modifier == 0) craftItems.Add(item);
+                size += 250;
+            }
         }
         if (parent.GetComponent<HorizontalLayoutGroup>()) parent.GetComponent<RectTransform>().sizeDelta = new Vector2(size, parent.GetComponent<RectTransform>().sizeDelta.y);
     }
@@ -206,15 +210,18 @@ public class UIManager : MonoBehaviour
         List<InventorySlot> slots = new List<InventorySlot>();
         foreach (var item in items)
         {
-            InventorySlot newSlot = new InventorySlot(Instantiate(prefab, parent.transform));
-            newSlot.gameObject.name = item.item.name;
-            newSlot.gameObject.SetActive(true);
-            newSlot.GetVariables();
-            UpdateSlot(newSlot, item);
-            newSlot.text.text = item.amount.ToString();
-            newSlot.icon.sprite = gameManager.itemManager.GetItem(item.name).icon;
-            newSlot.gameObject.name = item.name;
-            slots.Add(newSlot);
+            if ((item.name != "Row2" && item.name != "Row3"))
+            {
+                InventorySlot newSlot = new InventorySlot(Instantiate(prefab, parent.transform));
+                newSlot.gameObject.name = item.item.name;
+                newSlot.gameObject.SetActive(true);
+                newSlot.GetVariables();
+                UpdateSlot(newSlot, item);
+                newSlot.text.text = item.amount.ToString();
+                newSlot.icon.sprite = gameManager.itemManager.GetItem(item.name).icon;
+                newSlot.gameObject.name = item.name;
+                slots.Add(newSlot);
+            }
         }
         return slots.ToArray();
     }

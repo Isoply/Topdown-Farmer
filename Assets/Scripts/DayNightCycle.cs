@@ -14,7 +14,7 @@ public class DayNightCycle : MonoBehaviour
     int modifier = 1;
     int day = 0;
 
-    int opacity = 100;
+    int opacity = 35;
 
     int[] daytime = { 5, 15 };
     int[] nighttime = { 50, 60};

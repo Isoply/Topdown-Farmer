@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WaterScript : MonoBehaviour
 {
+    GameManager gameManager;
+
     ParticleSystem waterParticle;
     [HideInInspector] public bool isGrowing;
     [HideInInspector] public bool isWatering = false;
@@ -13,6 +15,7 @@ public class WaterScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.FindObjectOfType<GameManager>();
         waterParticle = GetComponentInChildren<ParticleSystem>();
 
         particleAmount = waterParticle.maxParticles;
@@ -22,7 +25,7 @@ public class WaterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) && !gameManager.isPaused)
         {
             waterParticle.maxParticles = particleAmount;
             isWatering = true;

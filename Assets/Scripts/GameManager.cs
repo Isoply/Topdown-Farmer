@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] GameObject winScreen;
+    [SerializeField] GameObject loseScreen;
+
     [HideInInspector] public DayNightCycle cycle;
     [HideInInspector] public ItemManager itemManager;
     [HideInInspector] public UIManager UIManager;
@@ -40,8 +43,20 @@ public class GameManager : MonoBehaviour
         {
             if (goal.number == currentDay)
             {
-                if (goal.money >= player.money) print("lose");
-                goalText.text = FindNextGoal(currentDay);
+                if (goal.money >= player.money && loseScreen != null)
+                {
+                    loseScreen.SetActive(true);
+                    ChangePauseState(PauseStates.Paused);
+                }
+                else
+                {
+                    if (FindNextGoal(currentDay) != null) goalText.text = FindNextGoal(currentDay);
+                    else if (winScreen != null)
+                    {
+                        winScreen.SetActive(true);
+                        ChangePauseState(PauseStates.Paused);
+                    }
+                }
                 return;
             }
         }

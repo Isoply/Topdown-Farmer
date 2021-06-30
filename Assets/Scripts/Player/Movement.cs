@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    GameManager gameManager;
 
     public float moveSpeed;
     private Rigidbody2D rb2d;
@@ -14,6 +15,7 @@ public class Movement : MonoBehaviour
 
     private void Awake()
     {
+        gameManager = GameObject.FindObjectOfType<GameManager>();
         rb2d = GetComponent<Rigidbody2D>();
         player = this.GetComponent<SpriteRenderer>();
         ws = FindObjectOfType<WaterScript>();
@@ -21,11 +23,11 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        Process();
+        if (!gameManager.isPaused) Process();
     }
     private void FixedUpdate()
     {
-        Move();
+        if (!gameManager.isPaused) Move();
     }
 
     void Process()

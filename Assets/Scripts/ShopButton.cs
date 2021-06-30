@@ -7,6 +7,7 @@ public class ShopButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 {
     [HideInInspector]  public GameManager gameManager;
 
+    [HideInInspector] public bool deactivateOnClick = false;
     [HideInInspector] public new string name;
     [HideInInspector] public int amount;
     public enum ItemTypes
@@ -36,6 +37,7 @@ public class ShopButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             gameManager.player.money -= amount;
             gameManager.itemManager.ChangeItemAmount(name, itemAmount);
             StartCoroutine(StartParticle(0.15f, new Color32(255, 25, 0, 150)));
+            if (deactivateOnClick) DeactivateButton();
         }
         else if (itemType == ItemTypes.Sell && gameManager.itemManager.CheckItemAmount(name) > 0)
         {
@@ -43,6 +45,7 @@ public class ShopButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             gameManager.itemManager.ChangeItemAmount(name, itemAmount);
             if(gameManager.crops.FindCrop(name) != null) gameManager.itemManager.ResetCropDecayTimer(gameManager.crops.FindCrop(name));
             StartCoroutine(StartParticle(0.15f, new Color32(255, 200, 0, 150)));
+            if (deactivateOnClick) DeactivateButton();
         }
         else if (itemType == ItemTypes.Craft)
         {
@@ -50,8 +53,16 @@ public class ShopButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             {
                 gameManager.itemManager.ChangeItemAmount(name, 1);
                 RemoveIngrediants();
+                if (deactivateOnClick) DeactivateButton();
             }
         }
+        print(GetComponent<Button>().interactable);
+    }
+
+    void DeactivateButton()
+    {
+        transform.Find("Item").GetComponent<Image>().color = GetComponent<Button>().colors.disabledColor;
+        GetComponent<Button>().enabled = false;
     }
 
     IEnumerator StartParticle(float _seconds, Color32 _color)
