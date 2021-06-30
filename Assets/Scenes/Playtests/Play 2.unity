@@ -15541,7 +15541,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  playerSprites: []
+  playerSprites:
+  - {fileID: -7338765713033929952, guid: 04dc3fabfa2599549b508031ff1ca204, type: 3}
+  - {fileID: -4245738604243887485, guid: 04dc3fabfa2599549b508031ff1ca204, type: 3}
+  - {fileID: 7364682651488144517, guid: 04dc3fabfa2599549b508031ff1ca204, type: 3}
+  - {fileID: 802321206317977270, guid: 04dc3fabfa2599549b508031ff1ca204, type: 3}
+  - {fileID: -2521826894279438384, guid: 04dc3fabfa2599549b508031ff1ca204, type: 3}
+  - {fileID: 7365574002475698461, guid: 04dc3fabfa2599549b508031ff1ca204, type: 3}
+  - {fileID: -4529042392078601758, guid: 04dc3fabfa2599549b508031ff1ca204, type: 3}
+  - {fileID: -482043112589295754, guid: 04dc3fabfa2599549b508031ff1ca204, type: 3}
 --- !u!61 &1457265060
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15630,7 +15638,7 @@ SpriteRenderer:
   m_SortingOrder: 10
   m_Sprite: {fileID: 7482667652216324306, guid: d3e344c229940784295d76cf6369722f,
     type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
