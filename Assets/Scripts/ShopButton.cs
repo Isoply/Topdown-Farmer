@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
@@ -34,12 +35,14 @@ public class ShopButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             gameManager.player.money -= amount;
             gameManager.itemManager.ChangeItemAmount(name, itemAmount);
+            StartCoroutine(StartParticle(0.15f, new Color32(255, 25, 0, 150)));
         }
         else if (itemType == ItemTypes.Sell && gameManager.itemManager.CheckItemAmount(name) > 0)
         {
             gameManager.player.money -= amount;
             gameManager.itemManager.ChangeItemAmount(name, itemAmount);
             if(gameManager.crops.FindCrop(name) != null) gameManager.itemManager.ResetCropDecayTimer(gameManager.crops.FindCrop(name));
+            StartCoroutine(StartParticle(0.15f, new Color32(255, 200, 0, 150)));
         }
         else if (itemType == ItemTypes.Craft)
         {
@@ -49,6 +52,15 @@ public class ShopButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 RemoveIngrediants();
             }
         }
+    }
+
+    IEnumerator StartParticle(float _seconds, Color32 _color)
+    {
+        gameManager.UIManager.clickParticles.startColor = _color;
+        gameManager.UIManager.clickParticles.transform.position = GameObject.FindObjectOfType<Canvas>().transform.position + Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        gameManager.UIManager.clickParticles.maxParticles = 1000;
+        yield return new WaitForSeconds(_seconds);
+        gameManager.UIManager.clickParticles.maxParticles = 0;
     }
 
     bool CheckCraftAmount()

@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     [HideInInspector] public List<Item> sellItems = new List<Item>();
     [HideInInspector] public List<Item> craftItems = new List<Item>();
     [HideInInspector] public List<Inventory> invSlots = new List<Inventory>();
+    [HideInInspector] public ParticleSystem clickParticles;
 
     GameObject recipePreview;
     GameObject displayedRecipies;
@@ -23,6 +24,8 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         GameObject HUD = GameObject.Find("HUD");
+        clickParticles = HUD.transform.Find("Shop").GetComponentInChildren<ParticleSystem>();
+        clickParticles.maxParticles = 0;
         invSlots.Add(new Inventory(HUD.transform.Find("Shop").Find("Header").Find("Inventory").gameObject));
         invSlots.Add(new Inventory(HUD.transform.Find("Player").Find("Inventory").gameObject));
         invSlots.Add(new Inventory(HUD.transform.Find("Crafting").Find("Inventory").gameObject));
