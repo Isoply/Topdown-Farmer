@@ -29,8 +29,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        goalText = GameObject.Find("Goal").GetComponentInChildren<Text>();
-        goalText.text = FindNextGoal(0);
+        if(GameObject.Find("Goal")) goalText = GameObject.Find("Goal").GetComponentInChildren<Text>();
+        if(goalText != null) goalText.text = FindNextGoal(0);
         cycle = GameObject.FindObjectOfType<DayNightCycle>();
         itemManager = GetComponent<ItemManager>();
         UIManager = GameObject.FindObjectOfType<UIManager>();

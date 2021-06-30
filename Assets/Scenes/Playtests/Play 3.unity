@@ -5397,7 +5397,7 @@ GameObject:
   - component: {fileID: 110137569}
   - component: {fileID: 110137568}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9142,7 +9142,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 585606043}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 858670797}
+        m_MethodName: ChangeScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Main Menu
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &585606043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14164,7 +14175,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 662246017}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 858670797}
+        m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &662246017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15737,7 +15759,7 @@ GameObject:
   - component: {fileID: 800731211}
   - component: {fileID: 800731210}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16586,7 +16608,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 999597464}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 858670797}
+        m_MethodName: ChangeScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Play 3
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &999597464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17324,7 +17357,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1106180604}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 858670797}
+        m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1106180604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23044,7 +23088,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1761578601}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 858670797}
+        m_MethodName: ChangeScene
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Main Menu
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1761578601
 MonoBehaviour:
   m_ObjectHideFlags: 0
