@@ -90,13 +90,11 @@ public class ShopButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        ScrollRect scrollRect = GetComponentInParent<ScrollRect>();
         gameManager.UIManager.ChangeRecipeDisplay(this);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        ScrollRect scrollRect = GetComponentInParent<ScrollRect>();
         gameManager.UIManager.ChangeRecipeDisplay(this);
     }
 }

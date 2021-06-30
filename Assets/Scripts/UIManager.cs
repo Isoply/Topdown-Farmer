@@ -146,10 +146,10 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (recipePreview.activeSelf && Input.mousePosition.x >= Screen.currentResolution.width / 2) recipePreview.transform.position = new Vector3(Input.mousePosition.x - recipePreview.GetComponent<RectTransform>().sizeDelta.x / 2, Input.mousePosition.y, Input.mousePosition.z);
-        else if (recipePreview.activeSelf) recipePreview.transform.position = new Vector3(Input.mousePosition.x + recipePreview.GetComponent<RectTransform>().sizeDelta.x / 2, Input.mousePosition.y, Input.mousePosition.z);
-        if (displayedRecipies.activeSelf && Input.mousePosition.y + 100 >= Screen.currentResolution.height / 2) displayedRecipies.transform.position = new Vector3(Input.mousePosition.x, (Input.mousePosition.y) - displayedRecipies.GetComponent<RectTransform>().sizeDelta.y / 2, Input.mousePosition.z);
-        else if (displayedRecipies.activeSelf) displayedRecipies.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y + displayedRecipies.GetComponent<RectTransform>().sizeDelta.y / 2, Input.mousePosition.z);
+        if (recipePreview.activeSelf && Input.mousePosition.x >= Screen.currentResolution.width / 2) recipePreview.transform.position = GameObject.FindObjectOfType<Canvas>().transform.position + (Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(-1, 0, 0));
+        else if (recipePreview.activeSelf) recipePreview.transform.position = GameObject.FindObjectOfType<Canvas>().transform.position + (Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(1, 0, 0));
+        if (displayedRecipies.activeSelf && Input.mousePosition.y >= (Screen.currentResolution.height - 200) / 2) displayedRecipies.transform.position = GameObject.FindObjectOfType<Canvas>().transform.position + (Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, -1, 0));
+        else if (displayedRecipies.activeSelf) displayedRecipies.transform.position = GameObject.FindObjectOfType<Canvas>().transform.position + (Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 1, 0));
     }
 
     public void SetShop(GameObject parent, Item[] items, int modifier)
