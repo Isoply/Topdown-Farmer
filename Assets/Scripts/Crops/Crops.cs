@@ -13,7 +13,7 @@ public class Crops
         new Crop(new Item ("Corn", 12), 3, 6),
         new Crop(new Item ("Potatoes", 16), 2, 9),
         new Crop(new Item ("Cauliflower", 20), 1, 12),
-        new Crop(new Item ("Pumpkin", 25), 0.5f, 15),
+        new Crop(new Item ("Pumpkins", 25), 0.5f, 15),
     };
 
     public Crop FindCrop(string name)

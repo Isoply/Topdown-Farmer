@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class ShopButton : MonoBehaviour
+public class ShopButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [HideInInspector]  public GameManager gameManager;
 
@@ -75,5 +74,17 @@ public class ShopButton : MonoBehaviour
             else if (itemType == ItemTypes.Sell) GetComponent<Button>().interactable = false;
         if (itemType == ItemTypes.Craft) if (CheckCraftAmount()) GetComponent<Button>().interactable = true;
             else if (itemType == ItemTypes.Craft) GetComponent<Button>().interactable = false;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        ScrollRect scrollRect = GetComponentInParent<ScrollRect>();
+        gameManager.UIManager.ChangeRecipeDisplay(this);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        ScrollRect scrollRect = GetComponentInParent<ScrollRect>();
+        gameManager.UIManager.ChangeRecipeDisplay(this);
     }
 }

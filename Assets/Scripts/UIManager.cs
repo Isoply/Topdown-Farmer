@@ -172,7 +172,7 @@ public class UIManager : MonoBehaviour
             if (newShopItem.transform.childCount > 1)
             {
                 newShopItem.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = item.name;
-                newShopItem.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = ((int)(item.price + ((item.price / 100f) * modifier))).ToString() + "$";
+                newShopItem.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = (modifier * (int)(item.price + ((item.price / 100f) * modifier))).ToString().Trim('-') + "$";
                 if (modifier >= 0) newShopItem.transform.GetChild(1).GetChild(1).GetComponent<Text>().color = Color.red;
                 else if (modifier < 0) newShopItem.transform.GetChild(1).GetChild(1).GetComponent<Text>().color = Color.green;
             }
@@ -192,7 +192,7 @@ public class UIManager : MonoBehaviour
             if (modifier > 0) buyItems.Add(item);
             else if (modifier < 0) sellItems.Add(item);
             else if (modifier == 0) craftItems.Add(item);
-            size += 165;
+            size += 210;
         }
         if (parent.GetComponent<HorizontalLayoutGroup>()) parent.GetComponent<RectTransform>().sizeDelta = new Vector2(size, parent.GetComponent<RectTransform>().sizeDelta.y);
     }
