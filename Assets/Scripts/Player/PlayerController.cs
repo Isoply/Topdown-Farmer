@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.E) && GetFeedback("Barrel").range) TakeFromBarrel();
         if (playerFeedback.text != "")
         {
-            playerFeedback.transform.position = Camera.main.WorldToScreenPoint(new Vector3(player.transform.position.x, player.transform.position.y + 0.5f, player.transform.position.z));
+            playerFeedback.transform.position = player.transform.position + new Vector3(0,1,0) + GameObject.FindObjectOfType<Canvas>().transform.position;
         }
         if (grow != null) UpdateCropText();
     }
