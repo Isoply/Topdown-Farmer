@@ -7,12 +7,13 @@ public class Crops
     //array
     public Crop[] allCrops =
     {
-        new Crop(new Item("Wheat", 3), 5, 2),
+        //price, crop decay en max harvest amount
+        new Crop(new Item("Wheat", 3), 20, 1),
         new Crop(new Item ("Strawberries", 9), 4, 3),
-        new Crop(new Item ("Corn", 12), 3, 4),
-        new Crop(new Item ("Potatoes", 16), 2, 6),
-        new Crop(new Item ("Cauliflower", 20), 1, 7),
-        new Crop(new Item ("Pumpkin", 25), 0.5f, 8),
+        new Crop(new Item ("Corn", 12), 3, 6),
+        new Crop(new Item ("Potatoes", 16), 2, 9),
+        new Crop(new Item ("Cauliflower", 20), 1, 12),
+        new Crop(new Item ("Pumpkin", 25), 0.5f, 15),
     };
 
     public Crop FindCrop(string name)

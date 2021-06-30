@@ -20,11 +20,18 @@ public class ItemManager : MonoBehaviour
         }
 
         //All recipes
+        //recipe name, price, ingredients to make en amount needed to make
         allRecipes.Add(new Item("Bread", 15, new Ingrediant(GetItem("Wheat"), 3)));
         allRecipes.Add(new Item("Strawberry Cake", 50, new Ingrediant(GetItem("Wheat"), 2), new Ingrediant(GetItem("Strawberries"), 2)));
         allRecipes.Add(new Item("Row2", 800000, new Ingrediant(GetItem("Wheat"), 1)));
         allRecipes.Add(new Item("Row3", 800000, new Ingrediant(GetItem("Wheat"), 2)));
+
+        allRecipes.Add(new Item("Strawberryjuice", 60, new Ingrediant(GetItem("Strawberries"), 6)));
+        allRecipes.Add(new Item("Pumpkinsoup", 100, new Ingrediant(GetItem("Pumpkins"), 6), new Ingrediant(GetItem("Corn"), 9 )));
+
+
         
+
         foreach (var recipe in allRecipes) allSlots.Add(new Slot(recipe.name, recipe));
         UpdateIcons();
         allSlots = SortToPrice();
