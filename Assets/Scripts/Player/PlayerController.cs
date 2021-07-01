@@ -15,7 +15,9 @@ public class PlayerController : MonoBehaviour
     {
         new Feedback("soil", "E"),
         new Feedback("barrel", "E"),
-        new Feedback("Crop", "R"),
+        new Feedback("Crop", "Q"),
+        new Feedback("Shop", "E"),
+        new Feedback("Crafting", "E"),
     };
 
     GameObject soil;
@@ -34,6 +36,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E)) PlantCrop();
         if (grow != null && Input.GetKeyDown(KeyCode.R)) HarvestCrop();
         if (Input.GetKey(KeyCode.E) && GetFeedback("Barrel").range) TakeFromBarrel();
+        if (Input.GetKeyDown(KeyCode.E) && GetFeedback("Shop").range) player.gameManager.UIManager.StartAnimationBool(GameObject.Find("HUD").transform.Find("Shop").GetComponent<Animator>());
+        if (Input.GetKeyDown(KeyCode.E) && GetFeedback("Crafting").range) player.gameManager.UIManager.StartAnimationBool(GameObject.Find("HUD").transform.Find("Crafting").GetComponent<Animator>());
         if (playerFeedback.text != "")
         {
             playerFeedback.transform.position = player.transform.position + new Vector3(0,1,0) + GameObject.FindObjectOfType<Canvas>().transform.position;
@@ -61,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
     public void HarvestCrop()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             if (grow.curSize >= grow.endSize && crop != null)
             {
@@ -115,6 +119,16 @@ public class PlayerController : MonoBehaviour
                 GetFeedback("Barrel").range = true;
             }
         }
+        if (other.name == "Shop")
+        {
+            playerFeedback.text = GetFeedback("Shop").text;
+            GetFeedback("Shop").range = true;
+        }
+        if (other.name == "Crafting")
+        {
+            playerFeedback.text = GetFeedback("Crafting").text;
+            GetFeedback("Crafting").range = true;
+        }
     }
 
     public void OnTriggerExit2D(Collider2D other)
@@ -137,6 +151,16 @@ public class PlayerController : MonoBehaviour
             if (curCrop != null) playerFeedback.text = "";
             soil = null;
             GetFeedback("Soil").range = false;
+        }
+        if (other.name == "Shop")
+        {
+            playerFeedback.text = "";
+            GetFeedback("Shop").range = false;
+        }
+        if (other.name == "Crafting")
+        {
+            playerFeedback.text = "";
+            GetFeedback("Crafting").range = false;
         }
     }
 
