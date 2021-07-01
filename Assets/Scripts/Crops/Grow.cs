@@ -9,9 +9,9 @@ public class Grow : MonoBehaviour
     public float growSpeed = 0.18f;
     public float endSize = 1;
     [HideInInspector] public float curSize = 0.1f;
-    float overwatered = 0.35f;
+    int overwatered = 50;
     public Sprite[] cropSprites;
-    float timer;
+    int timer;
     [HideInInspector] public bool isGrowing;
     private void Start()
     {
@@ -31,7 +31,7 @@ public class Grow : MonoBehaviour
             GetComponent<ParticleSystem>().maxParticles = 0;
             GetComponent<SpriteRenderer>().color = new Color(125, 0, 0, 255);
         }
-        else if (timer > 0.15f)
+        else if (timer > 30)
         {
             GetComponent<ParticleSystem>().maxParticles = 1000;
             isGrowing = true;
@@ -71,7 +71,6 @@ public class Grow : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        timer += Time.deltaTime;
+        timer++;
     }
-
 }
