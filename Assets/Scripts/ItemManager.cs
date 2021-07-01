@@ -22,11 +22,11 @@ public class ItemManager : MonoBehaviour
         //All recipes
         //recipe name, price, ingredients to make en amount needed to make
         allRecipes.Add(new Item("Bread", 5, new Ingredient(GetItem("Wheat"), 3)));
-        allRecipes.Add(new Item("Strawberry Cake", 250, new Ingredient(GetItem("Wheat"), 6), new Ingredient(GetItem("Strawberries"), 4)));
-        allRecipes.Add(new Item("Strawberry Juice", 300, new Ingredient(GetItem("Strawberries"), 6)));
-        allRecipes.Add(new Item("Pumpkin Soup", 380, new Ingredient(GetItem("Pumpkins"), 2), new Ingredient(GetItem("Corn"), 4)));
-        allRecipes.Add(new Item("Stew", 430, new Ingredient(GetItem("Potatoes"), 3), new Ingredient(GetItem("Corn"), 5), new Ingredient(GetItem("Cauliflower"), 3)));
-        allRecipes.Add(new Item("Veggie Plate", 460, new Ingredient(GetItem("Potatoes"), 3), new Ingredient(GetItem("Pumpkins"), 2), new Ingredient(GetItem("Cauliflower"), 4)));
+        allRecipes.Add(new Item("Strawberry Cake", 130, new Ingredient(GetItem("Wheat"), 3), new Ingredient(GetItem("Strawberries"), 4)));
+        allRecipes.Add(new Item("Strawberry Juice", 180, new Ingredient(GetItem("Strawberries"), 6)));
+        allRecipes.Add(new Item("Pumpkin Soup", 126000, new Ingredient(GetItem("Pumpkins"), 5), new Ingredient(GetItem("Corn"), 4)));
+        allRecipes.Add(new Item("Stew", 15000, new Ingredient(GetItem("Potatoes"), 3), new Ingredient(GetItem("Corn"), 5), new Ingredient(GetItem("Cauliflower"), 3)));
+        allRecipes.Add(new Item("Veggie Plate", 175000, new Ingredient(GetItem("Potatoes"), 3), new Ingredient(GetItem("Pumpkins"), 6), new Ingredient(GetItem("Cauliflower"), 4)));
 
         allRecipes.Add(new Item("Row2", 800000, new Ingredient(GetItem("Strawberries"), 6), new Ingredient(GetItem("Corn"), 6)));
         allRecipes.Add(new Item("Row3", 800000, new Ingredient(GetItem("Potatoes"), 6), new Ingredient(GetItem("Cauliflower"), 6)));

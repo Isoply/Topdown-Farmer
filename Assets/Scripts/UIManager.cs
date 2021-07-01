@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
     GameObject displayedRecipies;
     int maxPreviewHeight;
 
-    int priceDifferent = 5;
+    int priceDifferent = 2;
 
     private void Start()
     {

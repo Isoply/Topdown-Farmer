@@ -9,12 +9,14 @@ public class Crops
     {
         //price gaat x 5 voor buy en -5voor sell, crop decay en max harvest amount
         new Crop(new Item("Wheat", 2), 40, 1),
-        new Crop(new Item ("Strawberries", 10 ), 30, 1),
-        new Crop(new Item ("Corn", 18), 25, 2),
-        new Crop(new Item ("Potatoes", 25), 15, 2),
-        new Crop(new Item ("Cauliflower", 33), 10, 3),
-        new Crop(new Item ("Pumpkins", 40), 5, 4),
+        new Crop(new Item ("Strawberries", 15 ), 30, 1),
+        new Crop(new Item ("Corn", 87), 25, 2),
+        new Crop(new Item ("Potatoes", 1050), 20, 2),
+        new Crop(new Item ("Cauliflower", 13270), 15, 3),
+        new Crop(new Item ("Pumpkins", 16000), 10, 4),
     };
+
+    
 
     public Crop FindCrop(string name)
     {

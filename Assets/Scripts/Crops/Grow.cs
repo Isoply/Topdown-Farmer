@@ -61,8 +61,11 @@ public class Grow : MonoBehaviour
     {
         int startSize = 0;
         if (type.item.name == "Wheat") startSize = 0;
-        if (type.item.name == "Potatoes") startSize = 3;
         if (type.item.name == "Strawberries") startSize = 6;
+        if (type.item.name == "Corn") startSize = 9;
+        if (type.item.name == "Potatoes") startSize = 3;
+        if (type.item.name == "Cauliflower") startSize = 12;
+        if (type.item.name == "Pumpkins") startSize = 15;
 
         if (curSize >= endSize) GetComponent<SpriteRenderer>().sprite = cropSprites[startSize + 2];
         else if (curSize >= (endSize / 1.50)) GetComponent<SpriteRenderer>().sprite = cropSprites[startSize + 1];

@@ -6,13 +6,13 @@ public class Goals
 {
     public List<Day> allGoals = new List<Day>
     {
-        new Day(1, 5),
-        new Day(5, 500),
-        new Day(10, 1200),
-        new Day(15, 3000),
-        new Day(20, 8000),
-        new Day(25, 15000),
-        new Day(30, 30000),
+        new Day(1, 10),
+        new Day(5, 1500),
+        new Day(10, 5000),
+        new Day(15, 15000),
+        new Day(20, 30000),
+        new Day(25, 500000),
+        new Day(30, 1000000),
     };
 }
 
