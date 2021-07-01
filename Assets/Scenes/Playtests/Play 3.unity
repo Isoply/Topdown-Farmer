@@ -5724,8 +5724,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2115651826}
   m_HandleRect: {fileID: 2115651825}
   m_Direction: 0
-  m_Value: 0.5106383
-  m_Size: 0.999997
+  m_Value: 0.5
+  m_Size: 0.9999978
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8335,8 +8335,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 462077373}
   m_HandleRect: {fileID: 462077372}
   m_Direction: 0
-  m_Value: 0.5106383
-  m_Size: 0.999997
+  m_Value: 0.5
+  m_Size: 0.9999978
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -15044,8 +15044,8 @@ Transform:
   m_Children:
   - {fileID: 389118869}
   - {fileID: 484519577}
-  - {fileID: 696055976}
   - {fileID: 915256875}
+  - {fileID: 696055976}
   - {fileID: 2011262563}
   - {fileID: 1313837494}
   m_Father: {fileID: 0}
@@ -15230,12 +15230,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696055975}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.85, y: -0.5, z: 0}
+  m_LocalPosition: {x: -7.85, y: -1.76, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 1549742486}
   m_Father: {fileID: 672025493}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &696055977
 BoxCollider2D:
@@ -17208,12 +17208,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 915256874}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.85, y: -1.75, z: 0}
+  m_LocalPosition: {x: -7.85, y: -0.54, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 1606517641}
   m_Father: {fileID: 672025493}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &915256876
 BoxCollider2D:
