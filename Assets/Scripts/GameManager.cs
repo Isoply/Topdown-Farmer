@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         {
             if (goal.number == currentDay)
             {
-                if (goal.money >= player.money && loseScreen != null)
+                if (goal.money > player.money && loseScreen != null)
                 {
                     loseScreen.SetActive(true);
                     gameEnded = true;
