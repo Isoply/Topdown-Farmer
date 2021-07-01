@@ -73,5 +73,4 @@ public class Grow : MonoBehaviour
     {
         timer += Time.deltaTime;
     }
-
 }
