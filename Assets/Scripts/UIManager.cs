@@ -198,7 +198,8 @@ public class UIManager : MonoBehaviour
                 if (modifier > 0) buyItems.Add(item);
                 else if (modifier < 0) sellItems.Add(item);
                 else if (modifier == 0) craftItems.Add(item);
-                size += 250;
+                size += 282;
+                //12
             }
         }
         if (parent.GetComponent<HorizontalLayoutGroup>()) parent.GetComponent<RectTransform>().sizeDelta = new Vector2(size, parent.GetComponent<RectTransform>().sizeDelta.y);
