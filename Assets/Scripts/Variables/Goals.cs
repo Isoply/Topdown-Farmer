@@ -8,11 +8,11 @@ public class Goals
     {
         new Day(1, 10),
         new Day(5, 2000),
-        new Day(10, 5000),
-        new Day(15, 15000),
-        new Day(20, 30000),
-        new Day(25, 500000),
-        new Day(30, 1000000),
+        new Day(10, 150000),
+        new Day(15, 500000),
+        new Day(20, 1250000),
+        new Day(25, 2000000),
+        new Day(30, 5000000),
     };
 }
 
