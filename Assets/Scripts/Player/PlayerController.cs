@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E)) PlantCrop();
-        if (grow != null && Input.GetKeyDown(KeyCode.R)) HarvestCrop();
+        if (grow != null && Input.GetKeyDown(KeyCode.Q)) HarvestCrop();
         if (Input.GetKey(KeyCode.E) && GetFeedback("Barrel").range) TakeFromBarrel();
         if (Input.GetKeyDown(KeyCode.E) && GetFeedback("Shop").range) player.gameManager.UIManager.StartAnimationBool(GameObject.Find("HUD").transform.Find("Shop").GetComponent<Animator>());
         if (Input.GetKeyDown(KeyCode.E) && GetFeedback("Crafting").range) player.gameManager.UIManager.StartAnimationBool(GameObject.Find("HUD").transform.Find("Crafting").GetComponent<Animator>());
