@@ -52,11 +52,10 @@ public class ShopButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             if (CheckCraftAmount())
             {
                 gameManager.itemManager.ChangeItemAmount(name, 1);
-                RemoveIngrediants();
+                RemoveIngrediants(); 
                 if (deactivateOnClick) DeactivateButton();
             }
         }
-        print(GetComponent<Button>().interactable);
     }
 
     void DeactivateButton()
@@ -85,6 +84,7 @@ public class ShopButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         foreach (var ingrediant in gameManager.itemManager.GetItem(name).recipe.ToArray())
         {
+            if (gameManager.crops.FindCrop(ingrediant.item.name) != null) gameManager.itemManager.ResetCropDecayTimer(gameManager.crops.FindCrop(ingrediant.item.name));
             gameManager.itemManager.ChangeItemAmount(ingrediant.item.name, -ingrediant.amount);
         }
     }
