@@ -135,7 +135,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    int UpdateCraftTemplate(GameObject _template, Ingrediant ingrediant)
+    int UpdateCraftTemplate(GameObject _template, Ingredient ingrediant)
     {
         _template.GetComponentInChildren<Image>().sprite = ingrediant.item.icon;
         if (gameManager.itemManager.CheckItemAmount(ingrediant.item.name) >= ingrediant.amount) _template.GetComponentInChildren<Image>().color = new Color32(255, 255, 255, 255);
