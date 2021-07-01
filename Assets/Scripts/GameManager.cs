@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject winScreen;
     [SerializeField] GameObject loseScreen;
+    [SerializeField] GameObject pauseScreen;
 
     [HideInInspector] public DayNightCycle cycle;
     [HideInInspector] public ItemManager itemManager;
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     Text goalText;
 
     [HideInInspector] public bool isPaused;
+    bool gameEnded;
 
     public delegate void Event();
     public Event UpdateShop = delegate { };
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour
                 if (goal.money >= player.money && loseScreen != null)
                 {
                     loseScreen.SetActive(true);
+                    gameEnded = true;
                     ChangePauseState(PauseStates.Paused);
                 }
                 else
@@ -54,6 +57,7 @@ public class GameManager : MonoBehaviour
                     else if (winScreen != null)
                     {
                         winScreen.SetActive(true);
+                        gameEnded = true;
                         ChangePauseState(PauseStates.Paused);
                     }
                 }
@@ -79,6 +83,15 @@ public class GameManager : MonoBehaviour
             LateStart();
             timer = -1;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !gameEnded)
+        {
+            if (pauseScreen != null)
+            {
+                pauseScreen.SetActive(!pauseScreen.activeSelf);
+                ChangePauseState(PauseStates.Change);
+            }
+        }
     }
 
     public enum PauseStates { Paused, Unpaused, Change };
@@ -88,6 +101,10 @@ public class GameManager : MonoBehaviour
         if (pauseState == PauseStates.Change) isPaused = !isPaused;
         else if (pauseState == PauseStates.Paused) isPaused = true;
         else if (pauseState == PauseStates.Unpaused) isPaused = false;
+    }
+    public void ChangePauseState()
+    {
+        isPaused = !isPaused;
     }
 
     public void ChangeScene(string name)
