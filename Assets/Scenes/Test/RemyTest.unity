@@ -5706,7 +5706,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &184572321
 Transform:
   m_ObjectHideFlags: 0
@@ -5788,7 +5788,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 5968625106511319443, guid: 40fed60824c23ca4a824be1aee95da2b,
     type: 3}
-  m_Color: {r: 0.7735849, g: 0.511784, b: 0.025542913, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -6145,7 +6145,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &273736941
 Transform:
   m_ObjectHideFlags: 0
@@ -6227,7 +6227,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 5968625106511319443, guid: 40fed60824c23ca4a824be1aee95da2b,
     type: 3}
-  m_Color: {r: 0.7735849, g: 0.511784, b: 0.025542913, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -6597,7 +6597,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &327868863
 Transform:
   m_ObjectHideFlags: 0
@@ -6679,7 +6679,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 5968625106511319443, guid: 40fed60824c23ca4a824be1aee95da2b,
     type: 3}
-  m_Color: {r: 0.7735849, g: 0.511784, b: 0.025542913, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -7746,7 +7746,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &606519364
 Transform:
   m_ObjectHideFlags: 0
@@ -7828,7 +7828,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 5968625106511319443, guid: 40fed60824c23ca4a824be1aee95da2b,
     type: 3}
-  m_Color: {r: 0.7735849, g: 0.511784, b: 0.025542913, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -8113,7 +8113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &666819776
 Transform:
   m_ObjectHideFlags: 0
@@ -8195,7 +8195,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 5968625106511319443, guid: 40fed60824c23ca4a824be1aee95da2b,
     type: 3}
-  m_Color: {r: 0.7735849, g: 0.511784, b: 0.025542913, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -8258,6 +8258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
+  deactivateOnClick: 0
   name: 
   amount: 0
   itemType: 0
@@ -13455,6 +13456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
+  deactivateOnClick: 0
   name: 
   amount: 0
   itemType: 0
@@ -15039,7 +15041,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1064932713
 Transform:
   m_ObjectHideFlags: 0
@@ -17013,6 +17015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
+  deactivateOnClick: 0
   name: 
   amount: 0
   itemType: 0
@@ -17366,7 +17369,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1586740915
 Transform:
   m_ObjectHideFlags: 0
@@ -19017,6 +19020,7 @@ GameObject:
   - component: {fileID: 1999447461}
   - component: {fileID: 1999447460}
   - component: {fileID: 1999447459}
+  - component: {fileID: 1999447463}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -19048,6 +19052,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09168b09a8e01814f96a7a44cd5d4dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winScreen: {fileID: 0}
+  loseScreen: {fileID: 0}
   cycle: {fileID: 0}
   itemManager: {fileID: 0}
   UIManager: {fileID: 0}
@@ -19080,6 +19086,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1999447463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999447458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b49bf7de66c3c5a4ea3181414387119b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2015369265
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class Item
     public string name;
     public int price;
     public Sprite icon;
-    public List<Ingrediant> recipe = new List<Ingrediant>();
+    public List<Ingredient> recipe = new List<Ingredient>();
 
     public Item(string _name, int _price = 0)
     {
@@ -15,7 +15,7 @@ public class Item
         price = _price;
     }
 
-    public Item(string _name, int _price, Ingrediant ingrediant1 = null, Ingrediant ingrediant2 = null, Ingrediant ingrediant3 = null)
+    public Item(string _name, int _price, Ingredient ingrediant1 = null, Ingredient ingrediant2 = null, Ingredient ingrediant3 = null)
     {
         name = _name;
         price = _price;
@@ -25,12 +25,12 @@ public class Item
     }
 }
 
-public class Ingrediant
+public class Ingredient
 {
     public Item item;
     public int amount;
 
-    public Ingrediant(Item _item, int _amount = 1)
+    public Ingredient(Item _item, int _amount = 1)
     {
         item = _item;
         if (_amount < 1) amount = 1;
