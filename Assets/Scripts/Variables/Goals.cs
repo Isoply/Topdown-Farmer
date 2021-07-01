@@ -6,8 +6,8 @@ public class Goals
 {
     public List<Day> allGoals = new List<Day>
     {
-        new Day(1, 10),
-        new Day(5, 1500),
+        new Day(1, 0),
+        new Day(5, 2000),
         new Day(10, 5000),
         new Day(15, 15000),
         new Day(20, 30000),
