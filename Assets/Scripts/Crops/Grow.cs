@@ -12,7 +12,6 @@ public class Grow : MonoBehaviour
     float overwatered = 0.35f;
     public Sprite[] cropSprites;
     float timer;
-    float lastTime;
     [HideInInspector] public bool isGrowing;
     private void Start()
     {
@@ -37,9 +36,6 @@ public class Grow : MonoBehaviour
             GetComponent<ParticleSystem>().maxParticles = 1000;
             isGrowing = true;
         }
-
-        if (lastTime == timer) timer = 0;
-
     }
     public void Growing()
     {
@@ -75,8 +71,6 @@ public class Grow : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        lastTime = timer;
-
         timer += Time.deltaTime;
     }
 

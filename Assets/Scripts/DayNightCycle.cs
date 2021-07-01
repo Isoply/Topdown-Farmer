@@ -10,7 +10,7 @@ public class DayNightCycle : MonoBehaviour
     Text display;
     Image overlay;
 
-    float time = 15;
+    float time = 5;
     int modifier = 1;
     int day = 0;
 
